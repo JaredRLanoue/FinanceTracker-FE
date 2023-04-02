@@ -1,6 +1,6 @@
-import {ChakraProvider} from '@chakra-ui/react';
-import Cookies from 'js-cookie';
-import axios, {AxiosRequestConfig} from 'axios';
+import { ChakraProvider } from "@chakra-ui/react";
+import Cookies from "js-cookie";
+import axios, { AxiosRequestConfig } from "axios";
 import SidebarWithHeader from "../navigation/SidebarWithHeader";
 
 // function fetchData() {
@@ -20,13 +20,7 @@ import SidebarWithHeader from "../navigation/SidebarWithHeader";
 // }
 
 function Dashboard() {
-    return (
-        <SidebarWithHeader>
-            <ChakraProvider>
-                Dashboard Page
-            </ChakraProvider>
-        </SidebarWithHeader>
-    );
+  return <SidebarWithHeader>Dashboard Page</SidebarWithHeader>;
 }
 
 export default Dashboard;
