@@ -17,9 +17,10 @@ import {
 import React, {useState} from 'react';
 import {ViewIcon, ViewOffIcon} from '@chakra-ui/icons';
 import {ChakraProvider} from '@chakra-ui/react'
-import chakraTheme from "../ChakraTheme";
+import chakraTheme from "../../ChakraTheme";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 interface RegisterRequest {
     firstName: string;
@@ -40,6 +41,22 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const [loginStatus, setLoginStatus] = useState('');
     const navigate = useNavigate();
+
+    function setJwtCookie(jwt: string) {
+        const expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // expires in 7 days for now, maybe remove?
+
+        const cookieOptions: Cookies.CookieAttributes = {
+            expires,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        };
+
+        Cookies.set('jwt', jwt, cookieOptions);
+    }
+
+
+
     const handleLoginClick = () => {
         navigate('/login')
     };
@@ -62,6 +79,8 @@ export default function Register() {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        // const salt = await bcrypt.genSalt(10);
+        // const hashedPassword = await bcrypt.hash(password, salt);
 
         const requestBody: RegisterRequest = {
             firstName,
@@ -75,12 +94,13 @@ export default function Register() {
         try {
             const response = await axios.post<AuthenticationResponse>(endpoint, requestBody);
             localStorage.setItem('token', response.data.token);
+            // setJwtCookie(response.data.token);
             setLoginStatus('success')
-            navigate('/top')
-            // Redirect to the desired page after successful authentication
+            navigate('/dashboard')
         } catch (error) {
             setLoginStatus('failed')
-            localStorage.removeItem('token');
+            setPassword("")
+
             console.error(error)
         }
     };
@@ -150,10 +170,10 @@ export default function Register() {
                                     onClick={handleSubmit}
                                     loadingText="Submitting"
                                     size="lg"
-                                    bg={'blue.400'}
+                                    bg={'brand.100'}
                                     color={'white'}
                                     _hover={{
-                                        bg: 'blue.500',
+                                        bg: 'brand.200',
                                     }}>
                                     Sign up
                                 </Button>

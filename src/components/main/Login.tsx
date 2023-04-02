@@ -10,13 +10,14 @@ import {
     Button,
     Heading,
     Text,
-    useColorModeValue, Image
+    useColorModeValue
 } from '@chakra-ui/react';
 import {ChakraProvider} from '@chakra-ui/react'
-import chakraTheme from '../ChakraTheme'
+import chakraTheme from "../../ChakraTheme"
 import {useNavigate} from 'react-router-dom';
 import React, {useState} from "react";
 import axios from "axios";
+import bcrypt from "bcryptjs";
 
 interface LoginRequest {
     email: string,
@@ -48,6 +49,9 @@ export default function Login() {
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
+        // const salt = await bcrypt.genSalt(10);
+        // const hashedPassword = await bcrypt.hash(password, salt);
+
         const requestBody: LoginRequest = {
             email,
             password
@@ -57,12 +61,13 @@ export default function Login() {
 
         try {
             const response = await axios.post<AuthenticationResponse>(endpoint, requestBody);
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', response.data.token); // switch to cookie on both login and register
             setLoginStatus('success')
-            navigate('/top')
+            navigate('/dashboard')
             // Redirect to the desired page after successful authentication
         } catch (error) {
-            setLoginStatus('failed')
+            setLoginStatus('failed');
+            setPassword("");
             localStorage.removeItem('token');
             console.error(error)
         }
