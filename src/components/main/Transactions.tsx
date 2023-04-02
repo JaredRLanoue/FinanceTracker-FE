@@ -1,7 +1,7 @@
 import {ChakraProvider} from '@chakra-ui/react';
 import Cookies from 'js-cookie';
 import axios, {AxiosRequestConfig} from 'axios';
-import SidebarWithHeader from "../navigation/NavBarWithHeader";
+import SidebarWithHeader from "../navigation/SidebarWithHeader";
 
 // function fetchData() {
 //     const jwt = Cookies.get('jwt');

@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import Cookies from 'js-cookie';
 import axios, {AxiosRequestConfig} from 'axios';
-import SidebarWithHeader from "../navigation/NavBarWithHeader";
+import SidebarWithHeader from "../navigation/SidebarWithHeader";
 import {useEffect, useState} from "react";
 import {Box, Container, SimpleGrid} from '@chakra-ui/react'
 
