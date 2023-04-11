@@ -16,24 +16,7 @@ import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { EditAccountModal } from "./EditAccountModal";
 import { NewAccountModal } from "./NewAccountModal";
 import DeleteAlert from "./DeleteAlert";
-
-interface AccountsTableProps {
-  data: Account[];
-  setSortMethod: (reloading: string) => void;
-  setReloading: (reloading: boolean) => void;
-}
-
-export interface Account {
-  id: string;
-  name: string;
-  type: string;
-  balance: number;
-  starting_balance: number;
-  expenses: any[];
-  incomes: any[];
-  created_at: string;
-  updated_at: string;
-}
+import { Account, AccountsTableProps } from "../../common/Types";
 
 export default function AccountsTable(accounts: AccountsTableProps) {
   const [modalStatus, setModalStatus] = useState(false);

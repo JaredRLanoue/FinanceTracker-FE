@@ -9,15 +9,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
-import { Account } from "./AccountsTable";
 import axios, { AxiosRequestConfig } from "axios";
-
-interface DeleteAlertProps {
-  isOpen: boolean;
-  onClose: () => void;
-  accountData: Account;
-  setReloading: (reloading: boolean) => void;
-}
+import { Account, DeleteAlertProps } from "../../common/Types";
 
 const DeleteAlert: React.FC<DeleteAlertProps> = ({
   isOpen,

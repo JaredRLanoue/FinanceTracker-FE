@@ -19,17 +19,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-
-interface RegisterRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
-interface AuthenticationResponse {
-  token: string;
-}
+import { AuthenticationResponse, RegisterRequest } from "../../common/Types";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,18 +30,18 @@ export default function Register() {
   const [loginStatus, setLoginStatus] = useState("");
   const navigate = useNavigate();
 
-  function setJwtCookie(jwt: string) {
-    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // expires in 7 days for now, maybe remove?
-
-    const cookieOptions: Cookies.CookieAttributes = {
-      expires,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    };
-
-    Cookies.set("jwt", jwt, cookieOptions);
-  }
+  // function setJwtCookie(jwt: string) {
+  //   const expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // expires in 7 days for now, maybe remove?
+  //
+  //   const cookieOptions: Cookies.CookieAttributes = {
+  //     expires,
+  //     httpOnly: true,
+  //     secure: process.env.NODE_ENV === "production",
+  //     sameSite: "strict",
+  //   };
+  //
+  //   Cookies.set("jwt", jwt, cookieOptions);
+  // }
 
   const handleLoginClick = () => {
     navigate("/login");

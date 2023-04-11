@@ -1,14 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import React, { ReactText } from "react";
 import { Box, Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
-import { IconType } from "react-icons";
 import { MdKeyboardArrowRight } from "react-icons/all";
-
-interface NavItemProps extends FlexProps {
-  icon: IconType;
-  children: ReactText;
-  isActive: boolean;
-}
+import { NavItemProps } from "../../common/Types";
 
 export const NavItem = ({
   icon,

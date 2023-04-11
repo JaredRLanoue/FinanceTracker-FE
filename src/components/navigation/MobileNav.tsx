@@ -19,19 +19,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { FiChevronDown, FiMenu } from "react-icons/fi";
 import axios, { AxiosRequestConfig } from "axios";
-
-interface MobileProps extends FlexProps {
-  onOpen: () => void;
-}
-
-interface User {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  net_worth: number;
-  role: string;
-}
+import { MobileProps, User } from "../../common/Types";
 
 export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   // const [loading, setLoading] = useState<boolean>(true);

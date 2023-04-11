@@ -1,9 +1,5 @@
 import { Box, Stat, StatLabel, StatNumber } from "@chakra-ui/react";
-
-interface StatBoxProps {
-  label: string;
-  number?: string;
-}
+import { StatBoxProps } from "../../common/Types";
 
 export default function StatBox(props: StatBoxProps) {
   return (

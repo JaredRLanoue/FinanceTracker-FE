@@ -18,12 +18,7 @@ import {
 import { InputLeftAddon } from "@chakra-ui/react";
 import axios, { AxiosRequestConfig } from "axios";
 import React from "react";
-
-interface NewAccountModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  setReloading: (reloading: boolean) => void;
-}
+import { NewAccountModalProps } from "../../common/Types";
 
 export const NewAccountModal: React.FC<NewAccountModalProps> = ({
   isOpen,

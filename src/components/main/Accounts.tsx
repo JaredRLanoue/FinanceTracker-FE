@@ -1,27 +1,10 @@
-import {
-  Center,
-  Heading,
-  HStack,
-  Spinner,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
+import { Center, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
-import AccountsTable, { Account } from "../data/AccountsTable";
 import StatBox from "../data/StatBox";
-
-interface AccountList {
-  data: Account[];
-  meta: AccountMeta;
-}
-
-interface AccountMeta {
-  total: number;
-  average: number;
-  netWorth: number;
-}
+import { AccountList } from "../../common/Types";
+import AccountsTable from "../data/AccountsTable";
 
 function Accounts() {
   const [accountData, setAccountData] = useState<AccountList>();

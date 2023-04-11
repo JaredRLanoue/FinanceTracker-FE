@@ -17,15 +17,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Account } from "./AccountsTable";
 import axios, { AxiosRequestConfig } from "axios";
-
-interface EditAccountModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  accountData: Account;
-  setReloading: (reloading: boolean) => void;
-}
+import { EditAccountModalProps } from "../../common/Types";
 
 export const EditAccountModal: React.FC<EditAccountModalProps> = ({
   isOpen,

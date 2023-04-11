@@ -14,15 +14,7 @@ import { GoTag } from "react-icons/go";
 import { IconType } from "react-icons";
 import { NavItem } from "./NavItem";
 import { useLocation } from "react-router-dom";
-
-interface SidebarProps extends BoxProps {
-  onClose: () => void;
-}
-
-interface LinkItemProps {
-  name: string;
-  icon: IconType;
-}
+import { LinkItemProps, SidebarProps } from "../../common/Types";
 
 const LinkItems: Array<LinkItemProps> = [
   { name: "Dashboard", icon: FiHome },

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/main/Register";
 import Login from "./components/main/Login";
-import { PrivateRoute } from "./components/PrivateRoute";
+import { PrivateRoute } from "./components/main/PrivateRoute";
 import Dashboard from "./components/main/Dashboard";
 import Accounts from "./components/main/Accounts";
 import Transactions from "./components/main/Transactions";

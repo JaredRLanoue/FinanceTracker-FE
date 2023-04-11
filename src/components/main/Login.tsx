@@ -15,15 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-interface AuthenticationResponse {
-  token: string;
-}
+import { AuthenticationResponse, LoginRequest } from "../../common/Types";
 
 export default function Login() {
   const [email, setEmail] = useState("");
