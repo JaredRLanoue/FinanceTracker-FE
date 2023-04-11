@@ -1,18 +1,18 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  Input,
-  FormLabel,
-  InputGroup,
-  InputLeftAddon,
-  VStack,
-  ModalFooter,
-  Button,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalCloseButton,
+    FormControl,
+    Input,
+    FormLabel,
+    InputGroup,
+    InputLeftAddon,
+    VStack,
+    ModalFooter,
+    Button, Select, useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Account } from "./AccountsTable";
@@ -32,6 +32,7 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
   setReloading,
 }) => {
   const jwt = localStorage.getItem("token");
+  const toast = useToast();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,8 +42,6 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
       type: formData.get("type"),
       startingBalance: Number(formData.get("starting-balance")),
     };
-
-    console.log(payload);
 
     try {
       const headers: AxiosRequestConfig["headers"] = {
@@ -55,13 +54,24 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
       );
       if (response.status === 200) {
         setReloading(true);
-        console.log(payload);
         onClose();
       } else {
-        console.log("Error creating account");
+          toast({
+              title: "An error occurred while trying to edit the account, please try again!",
+              status: "error",
+              isClosable: true,
+              position: "bottom",
+              variant: "subtle",
+          });
       }
     } catch (error) {
-      console.log(error);
+        toast({
+            title: "Connection to the server has been lost!",
+            status: "error",
+            isClosable: true,
+            position: "bottom",
+            variant: "subtle",
+        });
     }
   };
 
@@ -95,14 +105,15 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
                   defaultValue={accountData.name}
                 />
               </FormControl>
-              <FormControl id="type">
-                <FormLabel>Type</FormLabel>
-                <Input
-                  name="type"
-                  placeholder="Enter type"
-                  defaultValue={accountData.type}
-                />
-              </FormControl>
+                <FormControl id="type">
+                    <FormLabel>Type</FormLabel>
+                    <Select name="type" placeholder="Select account type" defaultValue={accountData.type}>
+                        <option value="Checking">Checking</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Investment">Investment</option>
+                    </Select>
+                </FormControl>
               <FormControl id="starting-balance">
                 <FormLabel>Starting Balance</FormLabel>
                 <InputGroup>

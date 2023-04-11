@@ -1,4 +1,4 @@
-import { Center, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
+import {Center, Heading, HStack, Spinner, useToast, VStack} from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
@@ -53,7 +53,7 @@ function Accounts() {
               title: "Connection to the server has been lost!",
               status: "error",
               isClosable: true,
-              position: "bottom-right",
+              position: "bottom",
               variant: "subtle",
             });
             setAccountData({
@@ -70,7 +70,7 @@ function Accounts() {
         title: "Issue with login credentials, please sign in again!",
         status: "error",
         isClosable: true,
-        position: "bottom-right",
+        position: "bottom",
         variant: "subtle",
       });
     }

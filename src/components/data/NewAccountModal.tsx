@@ -11,12 +11,11 @@ import {
   InputGroup,
   ModalFooter,
   Button,
-  VStack,
+  VStack, Select, useToast,
 } from "@chakra-ui/react";
 import { InputLeftAddon } from "@chakra-ui/react";
 import axios, { AxiosRequestConfig } from "axios";
 import React from "react";
-import { bool } from "yup";
 
 interface NewAccountModalProps {
   isOpen: boolean;
@@ -30,6 +29,7 @@ export const NewAccountModal: React.FC<NewAccountModalProps> = ({
   setReloading,
 }) => {
   const jwt = localStorage.getItem("token");
+  const toast = useToast();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,13 +51,24 @@ export const NewAccountModal: React.FC<NewAccountModalProps> = ({
       );
       if (response.status === 200) {
         setReloading(true);
-        console.log(payload);
         onClose();
       } else {
-        console.log("Error creating account");
+        toast({
+          title: "An error occurred while trying to create the account, please try again!",
+          status: "error",
+          isClosable: true,
+          position: "bottom",
+          variant: "subtle",
+        });
       }
     } catch (error) {
-      console.log(error);
+      toast({
+        title: "Connection to the server has been lost!",
+        status: "error",
+        isClosable: true,
+        position: "bottom",
+        variant: "subtle",
+      });
     }
   };
 
@@ -89,7 +100,12 @@ export const NewAccountModal: React.FC<NewAccountModalProps> = ({
               </FormControl>
               <FormControl id="type">
                 <FormLabel>Type</FormLabel>
-                <Input name="type" placeholder="Enter type" />
+                <Select name="type" placeholder="Select account type">
+                  <option value="Checking">Checking</option>
+                  <option value="Savings">Savings</option>
+                  <option value="Credit">Credit</option>
+                  <option value="Investment">Investment</option>
+                </Select>
               </FormControl>
               <FormControl id="startingBalance">
                 <FormLabel>Starting Balance</FormLabel>

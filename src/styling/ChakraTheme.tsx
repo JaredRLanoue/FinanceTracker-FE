@@ -8,6 +8,16 @@ const chakraTheme = extendTheme({
       900: "#1a202c",
     },
   },
+  // fonts: {
+  //   body: `'Raleway', sans-serif`,
+  // },
+  // styles: {
+  //   global: {
+  //     body: {
+  //       fontFamily: "body",
+  //     },
+  //   },
+  // },
 });
 
 export default chakraTheme;
