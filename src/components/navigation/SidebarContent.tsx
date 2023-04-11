@@ -1,18 +1,15 @@
 import {
   Box,
   BoxProps,
-  ChakraProvider,
   CloseButton,
   Flex,
   Image,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import chakraTheme from "../../ChakraTheme";
 import React from "react";
 import { FiHome, FiSettings } from "react-icons/fi";
-import {MdAccountBalance, MdAttachMoney} from "react-icons/md";
-import { GrTransaction } from "react-icons/gr";
+import { MdAccountBalance, MdAttachMoney } from "react-icons/md";
 import { GoTag } from "react-icons/go";
 import { IconType } from "react-icons";
 import { NavItem } from "./NavItem";
