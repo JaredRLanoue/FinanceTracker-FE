@@ -1,97 +1,99 @@
 import {
-  ChakraProvider,
-  Spinner,
-  Stack,
-  Stat,
-  StatArrow,
-  StatGroup,
-  StatHelpText,
-  StatLabel,
-  StatNumber,
+    Center,
+    ChakraProvider, HStack,
+    Spinner,
+    Stack,
+    Stat,
+    StatArrow,
+    StatGroup,
+    StatHelpText,
+    StatLabel,
+    StatNumber, useToast, VStack,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 import SidebarWithHeader from "../navigation/SidebarWithHeader";
-import { useEffect, useState } from "react";
-import { Box, Container, SimpleGrid } from "@chakra-ui/react";
+import {useEffect, useState} from "react";
+import {Box, Container, SimpleGrid} from "@chakra-ui/react";
+import AccountsTable, {Account} from "../data/AccountsTable";
+import StatBox from "../data/StatBox";
 
-interface Account {
-  id: string;
-  name: string;
-  type: string;
-  balance: number;
-  starting_balance: number;
-  expenses: any[];
-  incomes: any[];
-  created_at: string;
-  updated_at: string;
+interface AccountList {
+    data: Account[];
+    meta: AccountMeta;
+}
+
+interface AccountMeta {
+    total: number;
+    average: number;
+    netWorth: number;
 }
 
 function Accounts() {
-  const [data, setData] = useState<Account[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
-  const jwt = localStorage.getItem("token");
+    const [accountData, setAccountData] = useState<AccountList>();
+    const [reloading, setReloading] = useState(true);
+    const [sortMethod, setSortMethod] = useState("newest");
+    const jwt = localStorage.getItem("token");
+    const toast = useToast();
 
-  useEffect(() => {
-    if (jwt) {
-      const headers: AxiosRequestConfig["headers"] = {
-        Authorization: `Bearer ${jwt}`,
-      };
-      axios
-        .get("http://localhost:8080/api/v1/auth/accounts", { headers })
-        .then((response) => {
-          if (response.data.length > 0) {
-            setData(response.data);
-          } else {
-            console.log("Empty");
-          }
-          // setLoading(false);
-        })
-        .catch((error) => {
-          // show error that connection to server has been lost
-          console.log(error);
-          // setLoading(false);
-        });
-    } else {
-      console.log("NO JWT");
-      // setLoading(false);
-    }
-  }, [jwt]);
+    useEffect(() => {
+        if (jwt) {
+            const headers: AxiosRequestConfig["headers"] = {
+                Authorization: `Bearer ${jwt}`,
+            };
+            if (reloading) {
+                axios
+                    .get("http://localhost:8080/api/v1/auth/accounts?sortMethod=" + sortMethod, {headers})
+                    .then((response) => {
+                        if (response.data.data.length > 0 && response.data.meta != undefined) {
+                            setAccountData(response.data as AccountList);
+                        } else {
+                            setAccountData({data: [], meta: {total: 0, average: 0, netWorth: 0}});
+                        }
+                    })
+                    .catch(() => {
+                        toast({
+                            title: "Connection to the server has been lost!",
+                            status: "error",
+                            isClosable: true,
+                            position: "bottom-right",
+                            variant: "subtle",
+                        })
+                        setAccountData({data: [], meta: {total: 0, average: 0, netWorth: 0}});
+                    })
+                    .finally(() => {
+                        setReloading(false);
+                    });
+            }
+        } else {
+            toast({
+                title: "Issue with login credentials, please sign in again!",
+                status: "error",
+                isClosable: true,
+                position: "bottom-right",
+                variant: "subtle",
+            })
+        }
+    }, [jwt, reloading]);
 
-  // if (loading) {
-  //     return <div>Loading...</div>;
-  // }
-
-  return (
-    <SidebarWithHeader>
-      {data.length > 0 ? (
-        <Stack direction={["column", "row"]} spacing="24px">
-          {data.map((account) => (
-            <div key={account.id}>
-              <Box
-                h="100px"
-                w="200px"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                backgroundColor="white"
-                p="4"
-                boxShadow="lg"
-              >
-                <Stat>
-                  <StatLabel>{account.name}</StatLabel>
-                  <StatNumber>${account.balance}</StatNumber>
-                  <StatHelpText>{account.type}</StatHelpText>
-                </Stat>
-              </Box>
-            </div>
-          ))}
-        </Stack>
-      ) : (
-        <Spinner />
-      )}
-    </SidebarWithHeader>
-  );
+    return (
+        <>
+            {accountData && accountData.data && accountData.meta ? (
+                <VStack spacing="24px">
+                    <HStack spacing="24px">
+                        <StatBox label={"Total Accounts"} number={(accountData?.meta.total).toString()}/>
+                        <StatBox label={"Total Balance"} number={"$" + accountData?.meta.netWorth.toString()}/>
+                        <StatBox label={"Average Balance"} number={"$" + accountData?.meta.average.toString()}/>
+                    </HStack>
+                    <AccountsTable data={accountData?.data} setSortMethod={setSortMethod} setReloading={setReloading}/>
+                </VStack>
+            ) : (
+                <Center h="100vh">
+                    <Spinner size="xl"/>
+                </Center>
+            )}
+        </>
+    );
 }
 
 export default Accounts;

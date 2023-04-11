@@ -20,7 +20,7 @@ import SidebarWithHeader from "../navigation/SidebarWithHeader";
 // }
 
 function Settings() {
-  return <SidebarWithHeader>Settings Page</SidebarWithHeader>;
+  return <>Settings Page</>;
 }
 
 export default Settings;

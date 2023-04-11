@@ -20,7 +20,7 @@ import SidebarWithHeader from "../navigation/SidebarWithHeader";
 // }
 
 function Dashboard() {
-  return <SidebarWithHeader>Dashboard Page</SidebarWithHeader>;
+  return <>Dashboard Page</>;
 }
 
 export default Dashboard;

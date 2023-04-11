@@ -20,7 +20,7 @@ import SidebarWithHeader from "../navigation/SidebarWithHeader";
 // }
 
 function Categories() {
-  return <SidebarWithHeader>Categories Page</SidebarWithHeader>;
+  return <>Categories Page</>;
 }
 
 export default Categories;

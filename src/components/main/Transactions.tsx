@@ -20,7 +20,7 @@ import SidebarWithHeader from "../navigation/SidebarWithHeader";
 // }
 
 function Transactions() {
-  return <SidebarWithHeader>Transaction Page</SidebarWithHeader>;
+  return <>Transaction Page</>;
 }
 
 export default Transactions;
