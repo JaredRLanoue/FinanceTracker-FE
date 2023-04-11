@@ -11,7 +11,7 @@ import {
 import chakraTheme from "../../ChakraTheme";
 import React from "react";
 import { FiHome, FiSettings } from "react-icons/fi";
-import { MdAccountBalance } from "react-icons/md";
+import {MdAccountBalance, MdAttachMoney} from "react-icons/md";
 import { GrTransaction } from "react-icons/gr";
 import { GoTag } from "react-icons/go";
 import { IconType } from "react-icons";
@@ -29,7 +29,7 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Dashboard", icon: FiHome },
   { name: "Accounts", icon: MdAccountBalance },
-  { name: "Transactions", icon: GrTransaction },
+  { name: "Transactions", icon: MdAttachMoney },
   { name: "Categories", icon: GoTag },
   { name: "Settings", icon: FiSettings },
 ];

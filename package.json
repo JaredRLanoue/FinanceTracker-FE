@@ -50,6 +50,8 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/js-cookie": "^3.0.3",
     "bcryptjs": "^2.4.3",
-    "prettier": "^2.8.7"
+    "formik": "^2.2.9",
+    "prettier": "^2.8.7",
+    "yup": "^1.0.2"
   }
 }
