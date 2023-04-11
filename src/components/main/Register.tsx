@@ -16,8 +16,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { ChakraProvider } from "@chakra-ui/react";
-import chakraTheme from "../../ChakraTheme";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";

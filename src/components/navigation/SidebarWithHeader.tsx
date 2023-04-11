@@ -6,8 +6,6 @@ import {
   DrawerContent,
   useDisclosure,
 } from "@chakra-ui/react";
-import chakraTheme from "../../ChakraTheme";
-import { ChakraProvider } from "@chakra-ui/react";
 import { SidebarContent } from "./SidebarContent";
 import { MobileNav } from "./MobileNav";
 

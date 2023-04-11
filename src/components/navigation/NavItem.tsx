@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { ReactText } from "react";
-import { ChakraProvider, Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
-import chakraTheme from "../../ChakraTheme";
+import { Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 interface NavItemProps extends FlexProps {
