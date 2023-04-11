@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import React, { ReactText } from "react";
-import { Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
+import {Box, Flex, FlexProps, Icon, Link} from "@chakra-ui/react";
 import { IconType } from "react-icons";
+import {MdKeyboardArrowRight} from "react-icons/all";
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
+  isActive: boolean;
 }
 
-export const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+export const NavItem = ({ icon, children, isActive, ...rest }: NavItemProps) => {
   const navigate = useNavigate();
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -16,36 +18,39 @@ export const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   };
 
   return (
-    <Link
-      onClick={handleClick}
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: "brand.100",
-          color: "white",
-        }}
-        {...rest}
+      <Link
+          onClick={handleClick}
+          style={{ textDecoration: "none" }}
+          _focus={{ boxShadow: "none" }}
       >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
+        <Flex
+            align="center"
+            p="4"
+            mx="4"
+            borderRadius="lg"
+            role="group"
+            cursor="pointer"
+            _hover={{
+              bg: "brand.100",
               color: "white",
             }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
-    </Link>
+            {...rest}
+        >
+          {isActive && (
+              <Box as={MdKeyboardArrowRight} boxSize={5} mr={2} display={{ base: "none", md: "block" }} />
+          )}
+          {icon && (
+              <Icon
+                  mr="4"
+                  fontSize="16"
+                  _groupHover={{
+                    color: "white",
+                  }}
+                  as={icon}
+              />
+          )}
+          {children}
+        </Flex>
+      </Link>
   );
 };
