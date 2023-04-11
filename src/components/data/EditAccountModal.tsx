@@ -1,18 +1,20 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalCloseButton,
-    FormControl,
-    Input,
-    FormLabel,
-    InputGroup,
-    InputLeftAddon,
-    VStack,
-    ModalFooter,
-    Button, Select, useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  Input,
+  FormLabel,
+  InputGroup,
+  InputLeftAddon,
+  VStack,
+  ModalFooter,
+  Button,
+  Select,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Account } from "./AccountsTable";
@@ -56,22 +58,23 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
         setReloading(true);
         onClose();
       } else {
-          toast({
-              title: "An error occurred while trying to edit the account, please try again!",
-              status: "error",
-              isClosable: true,
-              position: "bottom",
-              variant: "subtle",
-          });
+        toast({
+          title:
+            "An error occurred while trying to edit the account, please try again!",
+          status: "error",
+          isClosable: true,
+          position: "bottom",
+          variant: "subtle",
+        });
       }
     } catch (error) {
-        toast({
-            title: "Connection to the server has been lost!",
-            status: "error",
-            isClosable: true,
-            position: "bottom",
-            variant: "subtle",
-        });
+      toast({
+        title: "Connection to the server has been lost!",
+        status: "error",
+        isClosable: true,
+        position: "bottom",
+        variant: "subtle",
+      });
     }
   };
 
@@ -105,15 +108,19 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
                   defaultValue={accountData.name}
                 />
               </FormControl>
-                <FormControl id="type">
-                    <FormLabel>Type</FormLabel>
-                    <Select name="type" placeholder="Select account type" defaultValue={accountData.type}>
-                        <option value="Checking">Checking</option>
-                        <option value="Savings">Savings</option>
-                        <option value="Credit">Credit</option>
-                        <option value="Investment">Investment</option>
-                    </Select>
-                </FormControl>
+              <FormControl id="type">
+                <FormLabel>Type</FormLabel>
+                <Select
+                  name="type"
+                  placeholder="Select account type"
+                  defaultValue={accountData.type}
+                >
+                  <option value="Checking">Checking</option>
+                  <option value="Savings">Savings</option>
+                  <option value="Credit">Credit</option>
+                  <option value="Investment">Investment</option>
+                </Select>
+              </FormControl>
               <FormControl id="starting-balance">
                 <FormLabel>Starting Balance</FormLabel>
                 <InputGroup>

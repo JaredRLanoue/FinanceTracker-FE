@@ -11,7 +11,9 @@ import {
   InputGroup,
   ModalFooter,
   Button,
-  VStack, Select, useToast,
+  VStack,
+  Select,
+  useToast,
 } from "@chakra-ui/react";
 import { InputLeftAddon } from "@chakra-ui/react";
 import axios, { AxiosRequestConfig } from "axios";
@@ -54,7 +56,8 @@ export const NewAccountModal: React.FC<NewAccountModalProps> = ({
         onClose();
       } else {
         toast({
-          title: "An error occurred while trying to create the account, please try again!",
+          title:
+            "An error occurred while trying to create the account, please try again!",
           status: "error",
           isClosable: true,
           position: "bottom",
