@@ -1,12 +1,5 @@
-import {
-  Box,
-  Stat,
-  StatArrow,
-  StatHelpText,
-  StatLabel,
-  StatNumber,
-} from "@chakra-ui/react";
-import { StatBoxProps } from "../../../common/Types";
+import {Box, Stat, StatLabel, StatNumber,} from "@chakra-ui/react";
+import {StatBoxProps} from "../../../common/Types";
 import {useEffect, useState} from "react";
 
 export default function StatBox(props: StatBoxProps) {
@@ -27,7 +20,11 @@ export default function StatBox(props: StatBoxProps) {
       } else {
         const t = elapsedTime / 500;
         const easedT = cubicEaseInOut(t);
-        setDisplayedNumber(Math.round(displayedNumber + (props.number - displayedNumber) * easedT));
+        setDisplayedNumber(
+            Math.round(
+                displayedNumber + (props.number - displayedNumber) * easedT
+            )
+        );
         requestAnimationFrame(animationFrame);
       }
     };

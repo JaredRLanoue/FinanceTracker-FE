@@ -1,18 +1,8 @@
-import {
-  Box,
-  Center,
-  Container,
-  HStack,
-  SimpleGrid,
-  Spinner,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
-import Cookies from "js-cookie";
-import axios, { AxiosRequestConfig } from "axios";
-import { useEffect, useState } from "react";
+import {Center, HStack, Spinner, useToast, VStack,} from "@chakra-ui/react";
+import axios, {AxiosRequestConfig} from "axios";
+import {useEffect, useState} from "react";
 import StatBox from "../data/account/StatBox";
-import { AccountList } from "../../common/Types";
+import {AccountList} from "../../common/Types";
 import AccountsTable from "../data/account/AccountsTable";
 
 function Accounts() {
@@ -84,16 +74,13 @@ function Accounts() {
         <VStack spacing="24px">
           <HStack spacing="24px">
             <StatBox
-              label={"Total Accounts"}
-              number={(accountData?.meta.total)}
+                label={"Total Accounts"}
+                number={accountData?.meta.total}
             />
+            <StatBox label={"Net Worth"} number={accountData?.meta.netWorth}/>
             <StatBox
-              label={"Net Worth"}
-              number={accountData?.meta.netWorth}
-            />
-            <StatBox
-              label={"Average Balance"}
-              number={accountData?.meta.average}
+                label={"Average Balance"}
+                number={accountData?.meta.average}
             />
           </HStack>
           <AccountsTable
