@@ -1,6 +1,18 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const chakraTheme = extendTheme({
+  components: {
+    parts: ["field", "icon"],
+    baseStyle: {
+      field: {
+        color: "red.400",
+      },
+      icon: {
+        width: "2rem",
+        fontSize: "3rem",
+      },
+    },
+  },
   colors: {
     brand: {
       100: "#31C48D",

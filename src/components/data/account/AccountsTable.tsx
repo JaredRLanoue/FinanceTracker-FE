@@ -1,9 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
+  Button,
   Center,
   Flex,
+  Heading,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuOptionGroup,
   Select,
   Table,
   Tbody,
@@ -13,10 +19,10 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { EditAccountModal } from "./EditAccountModal";
-import { NewAccountModal } from "./NewAccountModal";
-import DeleteAlert from "./DeleteAlert";
-import { Account, AccountsTableProps } from "../../common/Types";
+import { AccountEditModal } from "./AccountEditModal";
+import { AccountNewModal } from "./AccountNewModal";
+import AccountDeleteAlert from "./AccountDeleteAlert";
+import { Account, AccountsTableProps } from "../../../common/Types";
 
 export default function AccountsTable(accounts: AccountsTableProps) {
   const [modalStatus, setModalStatus] = useState(false);
@@ -70,16 +76,22 @@ export default function AccountsTable(accounts: AccountsTableProps) {
       maxWidth="1200px"
       margin="0 auto"
     >
+      {/*<Flex justify="space-between" align="center" mb="4">*/}
+      {/*  <Heading as="h2" size="md">*/}
+      {/*    Accounts Table*/}
+      {/*  </Heading>*/}
+      {/*</Flex>*/}
       <Flex justify="space-between" align="center" mb="4">
-        <Box>
-          <Select onChange={(e) => handleSort(e.target.value)}>
+        <Heading as="h2" size="md">
+          Accounts Table
+        </Heading>
+        <Flex align="center">
+          <Select onChange={(e) => handleSort(e.target.value)} mr="4">
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
-            <option value="smallest">Smallest</option>
-            <option value="largest">Largest</option>
+            <option value="smallest">Ascending</option>
+            <option value="largest">Descending</option>
           </Select>
-        </Box>
-        <Box>
           <IconButton
             aria-label="Add Account"
             colorScheme="green"
@@ -87,7 +99,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
             size="sm"
             onClick={() => openNewAccountModal()}
           />
-        </Box>
+        </Flex>
       </Flex>
       <Box maxH="500px" overflow="auto" p="6px">
         <Table>
@@ -96,6 +108,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
               <Th>Name</Th>
               <Th>Type</Th>
               <Th>Balance</Th>
+              {/*<Th>Starting Balance</Th>*/}
               <Th>Created On</Th>
               <Th>Last Updated</Th>
               <Th>Actions</Th>
@@ -107,8 +120,8 @@ export default function AccountsTable(accounts: AccountsTableProps) {
                 <Tr key={account.id}>
                   <Td>{account.name}</Td>
                   <Td>{account.type}</Td>
-                  <Td>${account.balance}</Td>
-                  {/*TODO: Maybe remove?*/}
+                  <Td>${account.balance.toLocaleString()}</Td>
+                  {/*<Td>${account.starting_balance.toLocaleString()}</Td>*/}
                   <Td>
                     {new Date(account.created_at).toLocaleDateString("en-US", {
                       month: "2-digit",
@@ -148,7 +161,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
               ))
             ) : (
               <Tr>
-                <Td colSpan={4}>
+                <Td colSpan={6}>
                   <Center>
                     No accounts found... why not try adding some? 💰
                   </Center>
@@ -159,7 +172,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
         </Table>
       </Box>
       {editingAccount && (
-        <EditAccountModal
+        <AccountEditModal
           isOpen={modalStatus}
           onClose={() => {
             handleCloseModal();
@@ -170,7 +183,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
       )}
       {deletingAccount && (
         <Center>
-          <DeleteAlert
+          <AccountDeleteAlert
             isOpen={alertStatus}
             onClose={() => {
               closeDeleteAlert();
@@ -180,7 +193,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
           />
         </Center>
       )}
-      <NewAccountModal
+      <AccountNewModal
         isOpen={newModalStatus}
         onClose={closeNewAccountModal}
         setReloading={accounts.setReloading}

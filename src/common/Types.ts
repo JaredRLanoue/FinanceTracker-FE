@@ -31,7 +31,7 @@ export interface AccountMeta {
   netWorth: number;
 }
 
-export interface NewAccountModalProps {
+export interface NewEntityModalProps {
   isOpen: boolean;
   onClose: () => void;
   setReloading: (reloading: boolean) => void;
@@ -102,4 +102,51 @@ export interface SidebarProps extends BoxProps {
 export interface LinkItemProps {
   name: string;
   icon: IconType;
+}
+
+export interface ExpenseCategory {
+  category: string;
+  total: number;
+  budget: number;
+}
+
+export interface ExpenseCategories {
+  categories: ExpenseCategory[];
+}
+
+export interface ExpenseCategoriesProp {
+  categories: ExpenseCategory[];
+  setSortMethod: (reloading: string) => void;
+  setReloading: (reloading: boolean) => void;
+}
+
+export interface CategoryList {
+  categories: Category[];
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  monthly_budget: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CategoryProp {
+  categories: Category[];
+  setReloading: (reloading: boolean) => void;
+}
+
+export interface EditExpenseCategoryProp {
+  isOpen: boolean;
+  onClose: () => void;
+  category: Category;
+  setReloading: (reloading: boolean) => void;
+}
+
+export interface DeleteExpenseCategoryAlertProp {
+  isOpen: boolean;
+  onClose: () => void;
+  category: Category;
+  setReloading: (reloading: boolean) => void;
 }

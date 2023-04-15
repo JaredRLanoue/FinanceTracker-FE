@@ -18,9 +18,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
-import { EditAccountModalProps } from "../../common/Types";
+import { EditAccountModalProps } from "../../../common/Types";
 
-export const EditAccountModal: React.FC<EditAccountModalProps> = ({
+export const AccountEditModal: React.FC<EditAccountModalProps> = ({
   isOpen,
   onClose,
   accountData,

@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import axios, { AxiosRequestConfig } from "axios";
-import { Account, DeleteAlertProps } from "../../common/Types";
+import { Account, DeleteAlertProps } from "../../../common/Types";
 
-const DeleteAlert: React.FC<DeleteAlertProps> = ({
+const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
   isOpen,
   onClose,
   accountData,
@@ -103,4 +103,4 @@ const DeleteAlert: React.FC<DeleteAlertProps> = ({
   );
 };
 
-export default DeleteAlert;
+export default AccountDeleteAlert;

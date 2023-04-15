@@ -110,10 +110,13 @@ export default function Login() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Remember me</Checkbox>
-                <Link onClick={handleRegisterClick} color={"blue.400"}>
-                  Sign Up
-                </Link>
+                {/*<Checkbox>Remember me</Checkbox>*/}
+                <Text align={"center"}>
+                  Don't have an account?{" "}
+                  <Link onClick={handleRegisterClick} color={"blue.400"}>
+                    Sign Up
+                  </Link>
+                </Text>
               </Stack>
               <Button
                 onClick={handleSubmit}

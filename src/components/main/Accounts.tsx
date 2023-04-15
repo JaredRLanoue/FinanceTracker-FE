@@ -1,10 +1,19 @@
-import { Center, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Container,
+  HStack,
+  SimpleGrid,
+  Spinner,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
-import StatBox from "../data/StatBox";
+import StatBox from "../data/account/StatBox";
 import { AccountList } from "../../common/Types";
-import AccountsTable from "../data/AccountsTable";
+import AccountsTable from "../data/account/AccountsTable";
 
 function Accounts() {
   const [accountData, setAccountData] = useState<AccountList>();
@@ -68,7 +77,10 @@ function Accounts() {
 
   return (
     <>
-      {accountData && accountData.data && accountData.meta ? (
+      {accountData &&
+      accountData.data &&
+      accountData.meta &&
+      accountData.meta ? (
         <VStack spacing="24px">
           <HStack spacing="24px">
             <StatBox
@@ -76,12 +88,12 @@ function Accounts() {
               number={(accountData?.meta.total).toString()}
             />
             <StatBox
-              label={"Total Balance"}
-              number={"$" + accountData?.meta.netWorth.toString()}
+              label={"Net Worth"}
+              number={"$" + accountData?.meta.netWorth.toLocaleString()}
             />
             <StatBox
               label={"Average Balance"}
-              number={"$" + accountData?.meta.average.toString()}
+              number={"$" + accountData?.meta.average.toLocaleString()}
             />
           </HStack>
           <AccountsTable
