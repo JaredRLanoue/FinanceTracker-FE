@@ -85,15 +85,15 @@ function Accounts() {
           <HStack spacing="24px">
             <StatBox
               label={"Total Accounts"}
-              number={(accountData?.meta.total).toString()}
+              number={(accountData?.meta.total)}
             />
             <StatBox
               label={"Net Worth"}
-              number={"$" + accountData?.meta.netWorth.toLocaleString()}
+              number={accountData?.meta.netWorth}
             />
             <StatBox
               label={"Average Balance"}
-              number={"$" + accountData?.meta.average.toLocaleString()}
+              number={accountData?.meta.average}
             />
           </HStack>
           <AccountsTable

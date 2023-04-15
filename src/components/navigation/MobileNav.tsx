@@ -22,7 +22,6 @@ import axios, { AxiosRequestConfig } from "axios";
 import { MobileProps, User } from "../../common/Types";
 
 export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  // const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const jwt = localStorage.getItem("token");
@@ -37,16 +36,12 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         .get("http://localhost:8080/api/v1/auth/user/find", { headers })
         .then((response) => {
           setData(response.data as User);
-          // setLoading(false);
         })
         .catch((error) => {
-          // show error that connection to server has been lost
           console.log(error);
-          // setLoading(false);
         });
     } else {
       console.log("NO JWT");
-      // setLoading(false);
     }
   }, [jwt]);
 

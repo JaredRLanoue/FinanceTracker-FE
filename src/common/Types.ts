@@ -46,7 +46,7 @@ export interface EditAccountModalProps {
 
 export interface StatBoxProps {
   label: string;
-  number?: string;
+  number: number;
 }
 
 export interface NavItemProps extends FlexProps {
