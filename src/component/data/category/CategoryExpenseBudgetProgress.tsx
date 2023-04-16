@@ -1,6 +1,9 @@
-import { Box, Flex, Heading, Progress, Text } from "@chakra-ui/react";
+import {Box, Flex, Heading, Progress, Text} from "@chakra-ui/react";
 import React from "react";
-import { ExpenseCategoriesProp } from "../../../common/Types";
+import {ExpenseCategoriesProp} from "../../../common/Types";
+import {WarningTwoIcon} from "@chakra-ui/icons";
+
+// add all category totals together, and all monthly budgets. then make a Overall Budget bar at the bottom
 
 export const BudgetProgressBars: React.FC<ExpenseCategoriesProp> = ({
   categories,
@@ -27,11 +30,11 @@ export const BudgetProgressBars: React.FC<ExpenseCategoriesProp> = ({
         categories.map(({ category, total, budget }, index) => (
           <Flex key={category} alignItems="center" mb="3.5">
             <Box>
-              <Text fontWeight="bold" width="150px">
+              <Text fontWeight="bold" width="185px">
                 {category}
               </Text>
               <Text>
-                {"$" + total.toLocaleString()} / {"$" + budget.toLocaleString()}
+                {"$" + total.toLocaleString()} / {"$" + budget.toLocaleString()} {total > budget && <WarningTwoIcon color={"red"} mb={1}/>}
               </Text>
             </Box>
             <Box flex="1" position="relative">
@@ -49,19 +52,21 @@ export const BudgetProgressBars: React.FC<ExpenseCategoriesProp> = ({
               >
                 {budget === 0 ? "0%" : `${Math.round((total / budget) * 100)}%`}
               </Text>
-              <Progress
-                value={budget !== 0 ? (total / budget) * 100 : 0}
-                colorScheme={
-                  total / budget >= 1
-                    ? "red"
-                    : total / budget >= 0.75
-                    ? "yellow"
-                    : "green"
-                }
-                borderRadius="10px"
-                height="20px"
-                className="progress-bar"
-              />
+              {budget !== 0 && (
+                <Progress
+                  value={Math.min((total / budget) * 100, 100)}
+                  colorScheme={
+                    total / budget >= 1
+                      ? "red"
+                      : total / budget >= 0.75
+                      ? "yellow"
+                      : "green"
+                  }
+                  borderRadius="10px"
+                  height="20px"
+                  className="progress-bar"
+                />
+              )}
             </Box>
           </Flex>
         ))

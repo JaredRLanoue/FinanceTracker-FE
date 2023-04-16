@@ -1,11 +1,12 @@
-import { BoxProps, FlexProps } from "@chakra-ui/react";
-import { IconType } from "react-icons";
-import { ReactText } from "react";
+import {BoxProps, FlexProps} from "@chakra-ui/react";
+import {IconType} from "react-icons";
+import {ReactText} from "react";
 
 export interface AccountsTableProps {
   data: Account[];
   setSortMethod: (reloading: string) => void;
   setReloading: (reloading: boolean) => void;
+  sort: string;
 }
 
 export interface Account {
@@ -118,6 +119,7 @@ export interface ExpenseCategoriesProp {
   categories: ExpenseCategory[];
   setSortMethod: (reloading: string) => void;
   setReloading: (reloading: boolean) => void;
+  sort: string;
 }
 
 export interface CategoryList {
@@ -148,5 +150,42 @@ export interface DeleteExpenseCategoryAlertProp {
   isOpen: boolean;
   onClose: () => void;
   category: Category;
+  setReloading: (reloading: boolean) => void;
+}
+
+export interface TransactionsTableProps {
+  data: Transaction[];
+  setSortMethod: (sort: string) => void;
+  setReloading: (reloading: boolean) => void;
+  setType: (type: string) => void;
+  type: string;
+  sort: string;
+}
+
+export interface TransactionList {
+  data: Transaction[];
+  meta: TransactionMeta;
+}
+
+export interface TransactionMeta {
+  totalExpenses: number;
+  totalIncomes: number;
+  averageTransaction: number;
+}
+
+export interface Transaction {
+  id: string;
+  type: string;
+  category: string;
+  amount: number;
+  description: number;
+  counter_party: string;
+  date: string;
+}
+
+export interface DeleteTransactionAlertProp {
+  isOpen: boolean;
+  onClose: () => void;
+  transaction: Transaction;
   setReloading: (reloading: boolean) => void;
 }

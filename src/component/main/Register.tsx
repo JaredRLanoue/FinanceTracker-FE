@@ -1,25 +1,24 @@
 import {
-  Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  HStack,
-  InputRightElement,
-  Stack,
-  Button,
-  Heading,
-  Text,
-  useColorModeValue,
-  Link,
+    Box,
+    Button,
+    Flex,
+    FormControl,
+    FormLabel,
+    Heading,
+    HStack,
+    Input,
+    InputGroup,
+    InputRightElement,
+    Link,
+    Stack,
+    Text,
+    useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
-import { AuthenticationResponse, RegisterRequest } from "../../common/Types";
+import {AuthenticationResponse, RegisterRequest} from "../../common/Types";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);

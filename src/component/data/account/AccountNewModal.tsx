@@ -1,29 +1,28 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  Input,
-  FormLabel,
-  InputGroup,
-  InputLeftAddon,
-  VStack,
-  ModalFooter,
-  Button,
-  Select,
-  useToast,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputLeftAddon,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Select,
+    useToast,
+    VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import axios, { AxiosRequestConfig } from "axios";
-import { EditAccountModalProps } from "../../../common/Types";
+import axios, {AxiosRequestConfig} from "axios";
+import React from "react";
+import {NewEntityModalProps} from "../../../common/Types";
 
-export const AccountEditModal: React.FC<EditAccountModalProps> = ({
+export const AccountNewModal: React.FC<NewEntityModalProps> = ({
   isOpen,
   onClose,
-  accountData,
   setReloading,
 }) => {
   const jwt = localStorage.getItem("token");
@@ -42,8 +41,8 @@ export const AccountEditModal: React.FC<EditAccountModalProps> = ({
       const headers: AxiosRequestConfig["headers"] = {
         Authorization: `Bearer ${jwt}`,
       };
-      const response = await axios.put(
-        "http://localhost:8080/api/v1/auth/accounts/update/" + accountData.id,
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/auth/accounts/create",
         payload,
         { headers }
       );
@@ -53,7 +52,7 @@ export const AccountEditModal: React.FC<EditAccountModalProps> = ({
       } else {
         toast({
           title:
-            "An error occurred while trying to edit the account, please try again!",
+            "An error occurred while trying to create the account, please try again!",
           status: "error",
           isClosable: true,
           position: "bottom",
@@ -88,42 +87,33 @@ export const AccountEditModal: React.FC<EditAccountModalProps> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Edit {accountData.name} Account</ModalHeader>
+        <ModalHeader>Create New Account</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>
             <VStack spacing="24px">
               <FormControl id="name">
                 <FormLabel>Name</FormLabel>
-                <Input
-                  name="name"
-                  placeholder="Enter name"
-                  defaultValue={accountData.name}
-                />
+                <Input name="name" placeholder="Enter name" />
               </FormControl>
               <FormControl id="type">
                 <FormLabel>Type</FormLabel>
-                <Select
-                  name="type"
-                  placeholder="Select account type"
-                  defaultValue={accountData.type}
-                >
+                <Select name="type" placeholder="Select account type">
                   <option value="Checking">Checking</option>
                   <option value="Savings">Savings</option>
                   <option value="Credit">Credit</option>
                   <option value="Investment">Investment</option>
                 </Select>
               </FormControl>
-              <FormControl id="starting-balance">
+              <FormControl id="startingBalance">
                 <FormLabel>Starting Balance</FormLabel>
                 <InputGroup>
                   <InputLeftAddon children="$" />
                   <Input
                     name="starting-balance"
                     type="number"
-                    placeholder="Enter starting balance"
                     step={0.01}
-                    defaultValue={accountData.starting_balance}
+                    placeholder="0"
                   />
                 </InputGroup>
               </FormControl>
@@ -132,7 +122,7 @@ export const AccountEditModal: React.FC<EditAccountModalProps> = ({
         </ModalBody>
         <ModalFooter>
           <Button type="submit" colorScheme="green" form="edit-form">
-            Update
+            Create
           </Button>
         </ModalFooter>
       </ModalContent>

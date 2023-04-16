@@ -1,4 +1,4 @@
-import {Box, Stat, StatLabel, StatNumber,} from "@chakra-ui/react";
+import {Box, Stat, StatLabel, StatNumber} from "@chakra-ui/react";
 import {StatBoxProps} from "../../../common/Types";
 import {useEffect, useState} from "react";
 
@@ -21,9 +21,9 @@ export default function StatBox(props: StatBoxProps) {
         const t = elapsedTime / 500;
         const easedT = cubicEaseInOut(t);
         setDisplayedNumber(
-            Math.round(
-                displayedNumber + (props.number - displayedNumber) * easedT
-            )
+          Math.round(
+            displayedNumber + (props.number - displayedNumber) * easedT
+          )
         );
         requestAnimationFrame(animationFrame);
       }
@@ -50,19 +50,19 @@ export default function StatBox(props: StatBoxProps) {
   }
 
   return (
-      <Box
-          borderWidth="1px"
-          borderRadius="lg"
-          overflow="hidden"
-          backgroundColor="white"
-          p="4"
-          boxShadow="lg"
-          margin="0 auto"
-      >
-        <Stat>
-          <StatLabel>{props.label}</StatLabel>
-          <StatNumber>{"$" + displayedNumber.toLocaleString()}</StatNumber>
-        </Stat>
-      </Box>
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      backgroundColor="white"
+      p="4"
+      boxShadow="lg"
+      margin="0 auto"
+    >
+      <Stat>
+        <StatLabel>{props.label}</StatLabel>
+        <StatNumber>{props.label === 'Total Accounts' ? displayedNumber : "$" + displayedNumber.toLocaleString()}</StatNumber>
+      </Stat>
+    </Box>
   );
 }

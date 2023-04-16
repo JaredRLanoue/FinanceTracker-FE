@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
   Box,
   Button,
@@ -8,9 +8,9 @@ import {
   IconButton,
   Menu,
   MenuButton,
+  MenuItemOption,
   MenuList,
   MenuOptionGroup,
-  Select,
   Table,
   Tbody,
   Td,
@@ -18,11 +18,11 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { AccountEditModal } from "./AccountEditModal";
-import { AccountNewModal } from "./AccountNewModal";
+import {AddIcon, ChevronDownIcon, DeleteIcon, EditIcon,} from "@chakra-ui/icons";
+import {AccountEditModal} from "./AccountEditModal";
+import {AccountNewModal} from "./AccountNewModal";
 import AccountDeleteAlert from "./AccountDeleteAlert";
-import { Account, AccountsTableProps } from "../../../common/Types";
+import {Account, AccountsTableProps} from "../../../common/Types";
 
 export default function AccountsTable(accounts: AccountsTableProps) {
   const [modalStatus, setModalStatus] = useState(false);
@@ -59,10 +59,10 @@ export default function AccountsTable(accounts: AccountsTableProps) {
     setNewModalStatus(false);
   }
 
-  const handleSort = (option: string) => {
-    accounts.setSortMethod(option);
-    accounts.setReloading(true);
-  };
+  // const handleSort = (option: string) => {
+  //   accounts.setSortMethod(option);
+  //   accounts.setReloading(true);
+  // };
 
   return (
     <Box
@@ -86,12 +86,42 @@ export default function AccountsTable(accounts: AccountsTableProps) {
           Accounts Table
         </Heading>
         <Flex align="center">
-          <Select onChange={(e) => handleSort(e.target.value)} mr="4">
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="smallest">Ascending</option>
-            <option value="largest">Descending</option>
-          </Select>
+          <Menu
+            closeOnSelect={true}
+            onClose={() => accounts.setReloading(true)}
+          >
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              mr="8px"
+              variant="solid"
+            >
+              Sort
+            </MenuButton>
+            <MenuList minWidth="240px">
+              <MenuOptionGroup
+                value={accounts.sort}
+                onChange={(value) => accounts.setSortMethod(value.toString())}
+                title="Order"
+                type="radio"
+              >
+                <MenuItemOption value="newest">Newest</MenuItemOption>
+                <MenuItemOption value="oldest">Oldest</MenuItemOption>
+                <MenuItemOption value="smallest">
+                  Ascending Balance
+                </MenuItemOption>
+                <MenuItemOption value="largest">
+                  Descending Balance
+                </MenuItemOption>
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
+          {/*<Select onChange={(e) => handleSort(e.target.value)} mr="4">*/}
+          {/*  <option value="newest">Newest</option>*/}
+          {/*  <option value="oldest">Oldest</option>*/}
+          {/*  <option value="smallest">Ascending</option>*/}
+          {/*  <option value="largest">Descending</option>*/}
+          {/*</Select>*/}
           <IconButton
             aria-label="Add Account"
             colorScheme="green"
@@ -127,8 +157,8 @@ export default function AccountsTable(accounts: AccountsTableProps) {
                       month: "2-digit",
                       day: "2-digit",
                       year: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      // hour: "2-digit",
+                      // minute: "2-digit",
                     })}
                   </Td>
                   <Td>
@@ -136,8 +166,8 @@ export default function AccountsTable(accounts: AccountsTableProps) {
                       month: "2-digit",
                       day: "2-digit",
                       year: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      // hour: "2-digit",
+                      // minute: "2-digit",
                     })}
                   </Td>
                   <Td>

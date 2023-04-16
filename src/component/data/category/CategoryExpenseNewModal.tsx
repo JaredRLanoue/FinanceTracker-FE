@@ -1,24 +1,23 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  Input,
-  FormLabel,
-  InputGroup,
-  ModalFooter,
-  Button,
-  VStack,
-  Select,
-  useToast,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputLeftAddon,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    useToast,
+    VStack,
 } from "@chakra-ui/react";
-import { InputLeftAddon } from "@chakra-ui/react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 import React from "react";
-import { NewEntityModalProps } from "../../../common/Types";
+import {NewEntityModalProps} from "../../../common/Types";
 
 export const CategoryExpenseNewModal: React.FC<NewEntityModalProps> = ({
   isOpen,

@@ -1,32 +1,29 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  Input,
-  FormLabel,
-  InputGroup,
-  InputLeftAddon,
-  VStack,
-  ModalFooter,
-  Button,
-  Select,
-  useToast,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputLeftAddon,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Select,
+    useToast,
+    VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import axios, { AxiosRequestConfig } from "axios";
-import {
-  EditAccountModalProps,
-  EditExpenseCategoryProp,
-} from "../../../common/Types";
+import React from "react";
+import axios, {AxiosRequestConfig} from "axios";
+import {EditAccountModalProps} from "../../../common/Types";
 
-export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
+export const AccountEditModal: React.FC<EditAccountModalProps> = ({
   isOpen,
   onClose,
-  category,
+  accountData,
   setReloading,
 }) => {
   const jwt = localStorage.getItem("token");
@@ -37,7 +34,8 @@ export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
     const formData = new FormData(event.currentTarget);
     const payload = {
       name: formData.get("name"),
-      monthlyBudget: formData.get("monthly-budget"),
+      type: formData.get("type"),
+      startingBalance: Number(formData.get("starting-balance")),
     };
 
     try {
@@ -45,8 +43,7 @@ export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
         Authorization: `Bearer ${jwt}`,
       };
       const response = await axios.put(
-        "http://localhost:8080/api/v1/auth/expense/categories/update/" +
-          category.id,
+        "http://localhost:8080/api/v1/auth/accounts/update/" + accountData.id,
         payload,
         { headers }
       );
@@ -91,7 +88,7 @@ export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Edit {category.name}Budget Category</ModalHeader>
+        <ModalHeader>Edit {accountData.name} Account</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>
@@ -101,19 +98,32 @@ export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
                 <Input
                   name="name"
                   placeholder="Enter name"
-                  defaultValue={category.name}
+                  defaultValue={accountData.name}
                 />
               </FormControl>
-              <FormControl id="monthly-budget">
-                <FormLabel>Monthly Budget</FormLabel>
+              <FormControl id="type">
+                <FormLabel>Type</FormLabel>
+                <Select
+                  name="type"
+                  placeholder="Select account type"
+                  defaultValue={accountData.type}
+                >
+                  <option value="Checking">Checking</option>
+                  <option value="Savings">Savings</option>
+                  <option value="Credit">Credit</option>
+                  <option value="Investment">Investment</option>
+                </Select>
+              </FormControl>
+              <FormControl id="starting-balance">
+                <FormLabel>Starting Balance</FormLabel>
                 <InputGroup>
                   <InputLeftAddon children="$" />
                   <Input
-                    name="monthly-budget"
+                    name="starting-balance"
                     type="number"
-                    placeholder="Enter monthly budget"
+                    placeholder="Enter starting balance"
                     step={0.01}
-                    defaultValue={category.monthly_budget}
+                    defaultValue={accountData.starting_balance}
                   />
                 </InputGroup>
               </FormControl>

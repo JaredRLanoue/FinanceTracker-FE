@@ -1,26 +1,10 @@
-import {
-  Box,
-  Center,
-  ChakraProvider,
-  HStack,
-  Spinner,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
-import Cookies from "js-cookie";
-import axios, { AxiosRequestConfig } from "axios";
-import SidebarWithHeader from "../navigation/SidebarWithHeader";
+import {Center, HStack, Spinner, useToast, VStack,} from "@chakra-ui/react";
+import axios, {AxiosRequestConfig} from "axios";
 import CategoryExpensePieChart from "../data/category/CategoryExpensePieChart";
-import { useEffect, useState } from "react";
-import {
-  AccountList,
-  Category,
-  CategoryList,
-  ExpenseCategories,
-  ExpenseCategory,
-} from "../../common/Types";
+import {useEffect, useState} from "react";
+import {Category, ExpenseCategory,} from "../../common/Types";
 import CategoryExpenseTable from "../data/category/CategoryExpenseTable";
-import { BudgetProgressBars } from "../data/category/CategoryExpenseBudgetProgress";
+import {BudgetProgressBars} from "../data/category/CategoryExpenseBudgetProgress";
 
 const Categories = () => {
   const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
@@ -97,11 +81,13 @@ const Categories = () => {
           categories={categories}
           setSortMethod={setSortMethod}
           setReloading={setReloading}
+          sort={sortMethod}
         />
         <BudgetProgressBars
           categories={budget}
           setSortMethod={setSortMethod}
           setReloading={setReloading}
+          sort={sortMethod}
         />
       </HStack>
       <CategoryExpenseTable

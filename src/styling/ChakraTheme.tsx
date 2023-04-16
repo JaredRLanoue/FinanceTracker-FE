@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import {extendTheme} from "@chakra-ui/react";
 
 const chakraTheme = extendTheme({
   components: {
@@ -20,16 +20,6 @@ const chakraTheme = extendTheme({
       900: "#1a202c",
     },
   },
-  // fonts: {
-  //   body: `'Raleway', sans-serif`,
-  // },
-  // styles: {
-  //   global: {
-  //     body: {
-  //       fontFamily: "body",
-  //     },
-  //   },
-  // },
 });
 
 export default chakraTheme;

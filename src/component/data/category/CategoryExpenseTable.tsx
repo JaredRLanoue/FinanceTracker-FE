@@ -1,38 +1,10 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuOptionGroup,
-  Select,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { AccountEditModal } from "../account/AccountEditModal";
-import { AccountNewModal } from "../account/AccountNewModal";
-import AccountDeleteAlert from "../account/AccountDeleteAlert";
-import {
-  Account,
-  AccountsTableProps,
-  Category,
-  CategoryProp,
-  ExpenseCategoriesProp,
-} from "../../../common/Types";
-import { CategoryExpenseEditModal } from "./CategoryExpenseEditModal";
+import React, {useState} from "react";
+import {Box, Center, Flex, Heading, IconButton, Table, Tbody, Td, Th, Thead, Tr,} from "@chakra-ui/react";
+import {AddIcon, DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {Category, CategoryProp,} from "../../../common/Types";
+import {CategoryExpenseEditModal} from "./CategoryExpenseEditModal";
 import DeleteExpenseCategoryAlert from "./CategoryExpenseDeleteAlert";
-import { CategoryExpenseNewModal } from "./CategoryExpenseNewModal";
-import categories from "../../main/Categories";
+import {CategoryExpenseNewModal} from "./CategoryExpenseNewModal";
 
 export default function CategoryExpenseTable(prop: CategoryProp) {
   const [modalStatus, setModalStatus] = useState(false);

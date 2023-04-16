@@ -1,34 +1,35 @@
 import {
   AlertDialog,
   AlertDialogBody,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogContent,
   AlertDialogOverlay,
   Button,
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
-import axios, { AxiosRequestConfig } from "axios";
-import { Account, DeleteAlertProps } from "../../../common/Types";
+import axios, {AxiosRequestConfig} from "axios";
+import {Category, DeleteExpenseCategoryAlertProp,} from "../../../common/Types";
 
-const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
+const DeleteAlert: React.FC<DeleteExpenseCategoryAlertProp> = ({
   isOpen,
   onClose,
-  accountData,
+  category,
   setReloading,
 }) => {
   const toast = useToast();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
   const jwt = localStorage.getItem("token");
 
-  async function deleteAccount(account: Account) {
+  async function deleteExpenseCategory(category: Category) {
     try {
       const headers: AxiosRequestConfig["headers"] = {
         Authorization: `Bearer ${jwt}`,
       };
       const response = await axios.delete(
-        "http://localhost:8080/api/v1/auth/accounts/delete/" + account.id,
+        "http://localhost:8080/api/v1/auth/expense/categories/delete/" +
+          category.id,
         { headers }
       );
       if (response.status === 200) {
@@ -37,7 +38,7 @@ const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
       } else {
         toast({
           title:
-            "An error occurred while trying to delete the account, please try again!",
+            "An error occurred while trying to delete the expense category, please try again!",
           status: "error",
           isClosable: true,
           position: "bottom",
@@ -46,14 +47,13 @@ const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
       }
     } catch (error) {
       toast({
-        title: "Connection to the server has been lost!",
+        title: "Connection to the server has been lost, please try again!",
         status: "error",
         isClosable: true,
         position: "bottom",
         variant: "subtle",
       });
     }
-
     onClose();
   }
 
@@ -79,11 +79,11 @@ const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
       >
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Delete {accountData.name} Account
+            Delete {category.name} Expense Category
           </AlertDialogHeader>
           <AlertDialogBody>
-            Are you sure you want to delete this account? This action deletes
-            all associated transactions and cannot be undone.
+            Are you sure you want to delete this expense category? This action
+            deletes all associated transactions and cannot be undone.
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
@@ -91,7 +91,7 @@ const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
             </Button>
             <Button
               colorScheme="red"
-              onClick={() => deleteAccount(accountData)}
+              onClick={() => deleteExpenseCategory(category)}
               ml={3}
             >
               Delete
@@ -103,4 +103,4 @@ const AccountDeleteAlert: React.FC<DeleteAlertProps> = ({
   );
 };
 
-export default AccountDeleteAlert;
+export default DeleteAlert;

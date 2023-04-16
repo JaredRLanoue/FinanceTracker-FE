@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import React, { ReactText } from "react";
-import { Box, Flex, FlexProps, Icon, Link } from "@chakra-ui/react";
-import { MdKeyboardArrowRight } from "react-icons/all";
-import { NavItemProps } from "../../common/Types";
+import {useNavigate} from "react-router-dom";
+import React from "react";
+import {Box, Flex, Icon, Link} from "@chakra-ui/react";
+import {MdKeyboardArrowRight} from "react-icons/all";
+import {NavItemProps} from "../../common/Types";
 
 export const NavItem = ({
   icon,

@@ -1,13 +1,7 @@
-import React, { ReactNode } from "react";
-import {
-  Box,
-  useColorModeValue,
-  Drawer,
-  DrawerContent,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { SidebarContent } from "./SidebarContent";
-import { MobileNav } from "./MobileNav";
+import React, {ReactNode} from "react";
+import {Box, Drawer, DrawerContent, useColorModeValue, useDisclosure,} from "@chakra-ui/react";
+import {SidebarContent} from "./SidebarContent";
+import {MobileNav} from "./MobileNav";
 
 export default function SidebarWithHeader({
   children,

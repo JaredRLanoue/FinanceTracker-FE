@@ -1,21 +1,20 @@
 import {
-  Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
-  Button,
-  Heading,
-  Text,
-  useColorModeValue,
+    Box,
+    Button,
+    Flex,
+    FormControl,
+    FormLabel,
+    Heading,
+    Input,
+    Link,
+    Stack,
+    Text,
+    useColorModeValue,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import React, {useState} from "react";
 import axios from "axios";
-import { AuthenticationResponse, LoginRequest } from "../../common/Types";
+import {AuthenticationResponse, LoginRequest} from "../../common/Types";
 
 export default function Login() {
   const [email, setEmail] = useState("");

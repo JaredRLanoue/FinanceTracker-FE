@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
-import {
-  AccountList,
-  ExpenseCategory,
-  ExpenseCategories,
-  ExpenseCategoriesProp,
-} from "../../../common/Types";
+import React from "react";
+import {ExpenseCategoriesProp, ExpenseCategory,} from "../../../common/Types";
 import Chart from "react-apexcharts";
-import { Box, Flex, Heading, IconButton, Select } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuItemOption,
+  MenuList,
+  MenuOptionGroup,
+} from "@chakra-ui/react";
+import {ChevronDownIcon} from "@chakra-ui/icons";
 
 const CategoryExpensePieChart = ({
   categories,
   setSortMethod,
   setReloading,
+  sort,
 }: ExpenseCategoriesProp) => {
   const options = {
     labels: categories.map((category) => category.category),
@@ -37,11 +43,6 @@ const CategoryExpensePieChart = ({
     },
   };
   const series = categories.map((category) => category.total);
-
-  const handleSort = (option: string) => {
-    setSortMethod(option);
-    setReloading(true);
-  };
 
   const pieChartTotal = (categories: ExpenseCategory[]) => {
     let categoriesTotal = 0;
@@ -68,15 +69,28 @@ const CategoryExpensePieChart = ({
           Expense Breakdown
         </Heading>
         <Box>
-          <Select
-            defaultValue="month"
-            onChange={(e) => handleSort(e.target.value)}
-          >
-            <option value="week">Week</option>
-            <option value="month">Month</option>
-            <option value="year">Year</option>
-            <option value="all">Lifetime</option>
-          </Select>
+          <Menu closeOnSelect={true} onClose={() => setReloading(true)}>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              variant="solid"
+            >
+              View
+            </MenuButton>
+            <MenuList minWidth="240px">
+              <MenuOptionGroup
+                value={sort}
+                onChange={(value) => setSortMethod(value.toString())}
+                title="Range"
+                type="radio"
+              >
+                <MenuItemOption value="week">Week</MenuItemOption>
+                <MenuItemOption value="month">Month</MenuItemOption>
+                <MenuItemOption value="year">Year</MenuItemOption>
+                <MenuItemOption value="all">Lifetime</MenuItemOption>
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
         </Box>
       </Flex>
       {categories.length !== 0 && pieChartTotal(categories) !== 0 ? (

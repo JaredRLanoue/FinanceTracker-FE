@@ -1,14 +1,14 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Register from "./components/main/Register";
-import Login from "./components/main/Login";
-import { PrivateRoute } from "./components/main/PrivateRoute";
-import Dashboard from "./components/main/Dashboard";
-import Accounts from "./components/main/Accounts";
-import Transactions from "./components/main/Transactions";
-import Categories from "./components/main/Categories";
-import Settings from "./components/main/Settings";
-import SidebarWithHeader from "./components/navigation/SidebarWithHeader";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import Register from "./component/main/Register";
+import Login from "./component/main/Login";
+import {PrivateRoute} from "./component/main/PrivateRoute";
+import Dashboard from "./component/main/Dashboard";
+import Accounts from "./component/main/Accounts";
+import Transactions from "./component/main/Transactions";
+import Categories from "./component/main/Categories";
+import Settings from "./component/main/Settings";
+import SidebarWithHeader from "./component/navigation/SidebarWithHeader";
 
 function Router() {
   return (

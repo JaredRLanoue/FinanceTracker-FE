@@ -1,25 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {
-  Avatar,
-  Box,
-  Flex,
-  FlexProps,
-  HStack,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  Text,
-  useColorMode,
-  useColorModeValue,
-  VStack,
+    Avatar,
+    Box,
+    Flex,
+    HStack,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItem,
+    MenuList,
+    Text,
+    useColorMode,
+    useColorModeValue,
+    VStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { FiChevronDown, FiMenu } from "react-icons/fi";
-import axios, { AxiosRequestConfig } from "axios";
-import { MobileProps, User } from "../../common/Types";
+import React, {useEffect, useState} from "react";
+import {FiChevronDown, FiMenu} from "react-icons/fi";
+import axios, {AxiosRequestConfig} from "axios";
+import {MobileProps, User} from "../../common/Types";
 
 export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const navigate = useNavigate();

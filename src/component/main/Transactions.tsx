@@ -1,12 +1,12 @@
-import {Center, HStack, Spinner, useToast, VStack,} from "@chakra-ui/react";
+import {Center, Spinner, useToast, VStack,} from "@chakra-ui/react";
 import axios, {AxiosRequestConfig} from "axios";
+import TransactionsTable from "../data/transaction/TransactionsTable";
 import {useEffect, useState} from "react";
-import StatBox from "../data/account/StatBox";
-import {AccountList} from "../../common/Types";
-import AccountsTable from "../data/account/AccountsTable";
+import {TransactionList} from "../../common/Types";
 
-function Accounts() {
-  const [accountData, setAccountData] = useState<AccountList>();
+function Transactions() {
+  const [transaction, setTransaction] = useState<TransactionList>();
+  const [type, setType] = useState("all");
   const [reloading, setReloading] = useState(true);
   const [sortMethod, setSortMethod] = useState("newest");
   const jwt = localStorage.getItem("token");
@@ -18,10 +18,13 @@ function Accounts() {
         Authorization: `Bearer ${jwt}`,
       };
       if (reloading) {
+        console.log("STARTING TABLE");
         axios
           .get(
-            "http://localhost:8080/api/v1/auth/accounts?sortMethod=" +
-              sortMethod,
+            "http://localhost:8080/api/v1/auth/transactions?sortMethod=" +
+              sortMethod +
+              "&type=" +
+              type,
             { headers }
           )
           .then((response) => {
@@ -29,11 +32,15 @@ function Accounts() {
               response.data.data.length > 0 &&
               response.data.meta != undefined
             ) {
-              setAccountData(response.data as AccountList);
+              setTransaction(response.data as TransactionList);
             } else {
-              setAccountData({
+              setTransaction({
                 data: [],
-                meta: { total: 0, average: 0, netWorth: 0 },
+                meta: {
+                  totalExpenses: 0,
+                  totalIncomes: 0,
+                  averageTransaction: 0,
+                },
               });
             }
           })
@@ -45,9 +52,13 @@ function Accounts() {
               position: "bottom",
               variant: "subtle",
             });
-            setAccountData({
+            setTransaction({
               data: [],
-              meta: { total: 0, average: 0, netWorth: 0 },
+              meta: {
+                totalExpenses: 0,
+                totalIncomes: 0,
+                averageTransaction: 0,
+              },
             });
           })
           .finally(() => {
@@ -67,26 +78,15 @@ function Accounts() {
 
   return (
     <>
-      {accountData &&
-      accountData.data &&
-      accountData.meta &&
-      accountData.meta ? (
+      {transaction && transaction.data && transaction.meta ? (
         <VStack spacing="24px">
-          <HStack spacing="24px">
-            <StatBox
-                label={"Total Accounts"}
-                number={accountData?.meta.total}
-            />
-            <StatBox label={"Net Worth"} number={accountData?.meta.netWorth}/>
-            <StatBox
-                label={"Average Balance"}
-                number={accountData?.meta.average}
-            />
-          </HStack>
-          <AccountsTable
-            data={accountData?.data}
+          <TransactionsTable
+            data={transaction?.data}
             setSortMethod={setSortMethod}
             setReloading={setReloading}
+            setType={setType}
+            type={type}
+            sort={sortMethod}
           />
         </VStack>
       ) : (
@@ -98,4 +98,4 @@ function Accounts() {
   );
 }
 
-export default Accounts;
+export default Transactions;

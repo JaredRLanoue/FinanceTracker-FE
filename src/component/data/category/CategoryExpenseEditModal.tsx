@@ -1,30 +1,30 @@
 import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftAddon,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
   ModalBody,
   ModalCloseButton,
-  FormControl,
-  Input,
-  FormLabel,
-  InputGroup,
+  ModalContent,
   ModalFooter,
-  Button,
-  VStack,
-  Select,
+  ModalHeader,
+  ModalOverlay,
   useToast,
+  VStack,
 } from "@chakra-ui/react";
-import { InputLeftAddon } from "@chakra-ui/react";
-import axios, { AxiosRequestConfig } from "axios";
 import React from "react";
-import { NewEntityModalProps } from "../../../common/Types";
+import axios, {AxiosRequestConfig} from "axios";
+import {EditExpenseCategoryProp,} from "../../../common/Types";
 
-export const AccountNewModal: React.FC<NewEntityModalProps> = ({
-  isOpen,
-  onClose,
-  setReloading,
-}) => {
+export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
+                                                                              isOpen,
+                                                                              onClose,
+                                                                              category,
+                                                                              setReloading,
+                                                                            }) => {
   const jwt = localStorage.getItem("token");
   const toast = useToast();
 
@@ -33,16 +33,16 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
     const formData = new FormData(event.currentTarget);
     const payload = {
       name: formData.get("name"),
-      type: formData.get("type"),
-      startingBalance: Number(formData.get("starting-balance")),
+      monthlyBudget: formData.get("monthly-budget"),
     };
 
     try {
       const headers: AxiosRequestConfig["headers"] = {
         Authorization: `Bearer ${jwt}`,
       };
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/accounts/create",
+      const response = await axios.put(
+        "http://localhost:8080/api/v1/auth/expense/categories/update/" +
+          category.id,
         payload,
         { headers }
       );
@@ -52,7 +52,7 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
       } else {
         toast({
           title:
-            "An error occurred while trying to create the account, please try again!",
+            "An error occurred while trying to edit the account, please try again!",
           status: "error",
           isClosable: true,
           position: "bottom",
@@ -87,33 +87,29 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Create New Account</ModalHeader>
+        <ModalHeader>Edit {category.name}Budget Category</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>
             <VStack spacing="24px">
               <FormControl id="name">
                 <FormLabel>Name</FormLabel>
-                <Input name="name" placeholder="Enter name" />
+                <Input
+                  name="name"
+                  placeholder="Enter name"
+                  defaultValue={category.name}
+                />
               </FormControl>
-              <FormControl id="type">
-                <FormLabel>Type</FormLabel>
-                <Select name="type" placeholder="Select account type">
-                  <option value="Checking">Checking</option>
-                  <option value="Savings">Savings</option>
-                  <option value="Credit">Credit</option>
-                  <option value="Investment">Investment</option>
-                </Select>
-              </FormControl>
-              <FormControl id="startingBalance">
-                <FormLabel>Starting Balance</FormLabel>
+              <FormControl id="monthly-budget">
+                <FormLabel>Monthly Budget</FormLabel>
                 <InputGroup>
                   <InputLeftAddon children="$" />
                   <Input
-                    name="starting-balance"
+                    name="monthly-budget"
                     type="number"
+                    placeholder="Enter monthly budget"
                     step={0.01}
-                    placeholder="0"
+                    defaultValue={category.monthly_budget}
                   />
                 </InputGroup>
               </FormControl>
@@ -122,7 +118,7 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
         </ModalBody>
         <ModalFooter>
           <Button type="submit" colorScheme="green" form="edit-form">
-            Create
+            Update
           </Button>
         </ModalFooter>
       </ModalContent>

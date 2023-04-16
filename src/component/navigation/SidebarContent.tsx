@@ -1,23 +1,14 @@
-import {
-  Box,
-  BoxProps,
-  CloseButton,
-  Flex,
-  Image,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import {Box, CloseButton, Flex, Image, Text, useColorModeValue,} from "@chakra-ui/react";
 import React from "react";
-import { FiHome, FiSettings } from "react-icons/fi";
-import { MdAccountBalance, MdAttachMoney } from "react-icons/md";
-import { GoTag } from "react-icons/go";
-import { IconType } from "react-icons";
-import { NavItem } from "./NavItem";
-import { useLocation } from "react-router-dom";
-import { LinkItemProps, SidebarProps } from "../../common/Types";
+import {FiSettings} from "react-icons/fi";
+import {MdAccountBalance, MdAttachMoney} from "react-icons/md";
+import {GoTag} from "react-icons/go";
+import {NavItem} from "./NavItem";
+import {useLocation} from "react-router-dom";
+import {LinkItemProps, SidebarProps} from "../../common/Types";
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Dashboard", icon: FiHome },
+  // { name: "Dashboard", icon: FiHome },
   { name: "Accounts", icon: MdAccountBalance },
   { name: "Transactions", icon: MdAttachMoney },
   { name: "Categories", icon: GoTag },
