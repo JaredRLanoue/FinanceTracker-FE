@@ -1,18 +1,18 @@
 import {
-    Box,
-    Button,
-    Flex,
-    FormControl,
-    FormLabel,
-    Heading,
-    HStack,
-    Input,
-    InputGroup,
-    InputRightElement,
-    Link,
-    Stack,
-    Text,
-    useColorModeValue,
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  HStack,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, {useState} from "react";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
@@ -84,7 +84,7 @@ export default function Register() {
       localStorage.setItem("token", response.data.token);
       // setJwtCookie(response.data.token);
       setLoginStatus("success");
-      navigate("/dashboard");
+      navigate("/accounts"); // set back to dashboard once you finish it
     } catch (error) {
       setLoginStatus("failed");
       setPassword("");

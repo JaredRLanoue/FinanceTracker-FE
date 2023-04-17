@@ -1,19 +1,18 @@
 import {useNavigate} from "react-router-dom";
 import {
-    Avatar,
-    Box,
-    Flex,
-    HStack,
-    IconButton,
-    Menu,
-    MenuButton,
-    MenuDivider,
-    MenuItem,
-    MenuList,
-    Text,
-    useColorMode,
-    useColorModeValue,
-    VStack,
+  Avatar,
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Text,
+  useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import {FiChevronDown, FiMenu} from "react-icons/fi";
@@ -22,7 +21,6 @@ import {MobileProps, User} from "../../common/Types";
 
 export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const navigate = useNavigate();
-  const { colorMode, toggleColorMode } = useColorMode();
   const jwt = localStorage.getItem("token");
   const [data, setData] = useState<User>();
 
@@ -91,7 +89,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               _focus={{ boxShadow: "none" }}
             >
               <HStack>
-                <Avatar size={"sm"} src={""} />
+                <Avatar size={"sm"} src={"user.png"} />
                 <VStack
                   display={{ base: "none", md: "flex" }}
                   alignItems="flex-start"

@@ -1,8 +1,8 @@
-import {Center, HStack, Spinner, useToast, VStack,} from "@chakra-ui/react";
+import {Center, HStack, Spinner, useToast, VStack} from "@chakra-ui/react";
 import axios, {AxiosRequestConfig} from "axios";
 import CategoryExpensePieChart from "../data/category/CategoryExpensePieChart";
 import {useEffect, useState} from "react";
-import {Category, ExpenseCategory,} from "../../common/Types";
+import {Category, ExpenseCategory} from "../../common/Types";
 import CategoryExpenseTable from "../data/category/CategoryExpenseTable";
 import {BudgetProgressBars} from "../data/category/CategoryExpenseBudgetProgress";
 

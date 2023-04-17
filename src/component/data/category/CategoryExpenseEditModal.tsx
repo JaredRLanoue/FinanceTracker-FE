@@ -17,14 +17,14 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import axios, {AxiosRequestConfig} from "axios";
-import {EditExpenseCategoryProp,} from "../../../common/Types";
+import {EditExpenseCategoryProp} from "../../../common/Types";
 
 export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
-                                                                              isOpen,
-                                                                              onClose,
-                                                                              category,
-                                                                              setReloading,
-                                                                            }) => {
+  isOpen,
+  onClose,
+  category,
+  setReloading,
+}) => {
   const jwt = localStorage.getItem("token");
   const toast = useToast();
 
@@ -49,10 +49,17 @@ export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
       if (response.status === 200) {
         setReloading(true);
         onClose();
+        toast({
+          title: "Expense category successfully created!",
+          status: "success",
+          isClosable: true,
+          position: "bottom",
+          variant: "subtle",
+        });
       } else {
         toast({
           title:
-            "An error occurred while trying to edit the account, please try again!",
+            "An error occurred while trying to edit the expense category, please try again!",
           status: "error",
           isClosable: true,
           position: "bottom",
@@ -87,7 +94,7 @@ export const CategoryExpenseEditModal: React.FC<EditExpenseCategoryProp> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Edit {category.name}Budget Category</ModalHeader>
+        <ModalHeader>Edit Budget Category</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>

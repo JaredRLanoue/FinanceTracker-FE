@@ -1,20 +1,20 @@
 import {
-    Button,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    InputLeftAddon,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    Select,
-    useToast,
-    VStack,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  useToast,
+  VStack,
 } from "@chakra-ui/react";
 import axios, {AxiosRequestConfig} from "axios";
 import React from "react";
@@ -49,10 +49,16 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
       if (response.status === 200) {
         setReloading(true);
         onClose();
+        toast({
+          title: "Account successfully created!",
+          status: "success",
+          isClosable: true,
+          position: "bottom",
+          variant: "subtle",
+        });
       } else {
         toast({
-          title:
-            "An error occurred while trying to create the account, please try again!",
+          title: "Connection to the server has been lost!",
           status: "error",
           isClosable: true,
           position: "bottom",
@@ -61,7 +67,7 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
       }
     } catch (error) {
       toast({
-        title: "Connection to the server has been lost!",
+        title: "Failed to create account, please try again!",
         status: "error",
         isClosable: true,
         position: "bottom",
@@ -87,7 +93,7 @@ export const AccountNewModal: React.FC<NewEntityModalProps> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Create New Account</ModalHeader>
+        <ModalHeader>Create Account</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>

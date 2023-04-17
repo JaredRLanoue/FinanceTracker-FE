@@ -54,7 +54,7 @@ export default function Login() {
       );
       localStorage.setItem("token", response.data.token); // switch to cookie on both login and register
       setLoginStatus("success");
-      navigate("/dashboard");
+      navigate("/accounts");
       // Redirect to the desired page after successful authentication
     } catch (error) {
       setLoginStatus("failed");

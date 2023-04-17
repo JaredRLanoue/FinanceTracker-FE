@@ -61,7 +61,11 @@ export default function StatBox(props: StatBoxProps) {
     >
       <Stat>
         <StatLabel>{props.label}</StatLabel>
-        <StatNumber>{props.label === 'Total Accounts' ? displayedNumber : "$" + displayedNumber.toLocaleString()}</StatNumber>
+        <StatNumber>
+          {props.label === "Total Accounts"
+            ? displayedNumber
+            : "$" + displayedNumber.toLocaleString()}
+        </StatNumber>
       </Stat>
     </Box>
   );

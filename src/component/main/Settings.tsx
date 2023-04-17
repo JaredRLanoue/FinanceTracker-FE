@@ -14,8 +14,33 @@
 //     }
 // }
 
+import {Box, Center, Divider, Heading, VStack,} from "@chakra-ui/react";
+import React from "react";
+import {SettingsCard} from "../setting/SettingsCard";
+
 function Settings() {
-  return <>Settings Page</>;
+  return (
+    <Center>
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        backgroundColor="white"
+        p="4"
+        boxShadow="lg"
+        overflowY="auto"
+        width={450}
+      >
+        <VStack spacing="24px" align="center">
+          <Heading as="h2" size="md">
+            Settings
+          </Heading>
+          <Divider />
+          <SettingsCard />
+        </VStack>
+      </Box>
+    </Center>
+  );
 }
 
 export default Settings;

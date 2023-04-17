@@ -1,19 +1,19 @@
 import {
-    Button,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    InputLeftAddon,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    useToast,
-    VStack,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useToast,
+  VStack,
 } from "@chakra-ui/react";
 import axios, {AxiosRequestConfig} from "axios";
 import React from "react";
@@ -47,10 +47,16 @@ export const CategoryExpenseNewModal: React.FC<NewEntityModalProps> = ({
       if (response.status === 200) {
         setReloading(true);
         onClose();
+        toast({
+          title: "Expense category successfully updated!",
+          status: "success",
+          isClosable: true,
+          position: "bottom",
+          variant: "subtle",
+        });
       } else {
         toast({
-          title:
-            "An error occurred while trying to delete the account, please try again!",
+          title: "Failed to create expense category, please try again!",
           status: "error",
           isClosable: true,
           position: "bottom",
@@ -85,7 +91,7 @@ export const CategoryExpenseNewModal: React.FC<NewEntityModalProps> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Create New Budget Category</ModalHeader>
+        <ModalHeader>Create Expense Category</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>

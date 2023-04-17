@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Box, Center, Flex, Heading, IconButton, Table, Tbody, Td, Th, Thead, Tr,} from "@chakra-ui/react";
 import {AddIcon, DeleteIcon, EditIcon} from "@chakra-ui/icons";
-import {Category, CategoryProp,} from "../../../common/Types";
+import {Category, CategoryProp} from "../../../common/Types";
 import {CategoryExpenseEditModal} from "./CategoryExpenseEditModal";
 import DeleteExpenseCategoryAlert from "./CategoryExpenseDeleteAlert";
 import {CategoryExpenseNewModal} from "./CategoryExpenseNewModal";
@@ -104,8 +104,8 @@ export default function CategoryExpenseTable(prop: CategoryProp) {
                       month: "2-digit",
                       day: "2-digit",
                       year: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      // hour: "2-digit",
+                      // minute: "2-digit",
                     })}
                   </Td>
                   <Td>
@@ -113,8 +113,8 @@ export default function CategoryExpenseTable(prop: CategoryProp) {
                       month: "2-digit",
                       day: "2-digit",
                       year: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      // hour: "2-digit",
+                      // minute: "2-digit",
                     })}
                   </Td>
                   <Td>

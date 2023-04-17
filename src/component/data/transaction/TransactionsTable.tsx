@@ -22,33 +22,35 @@ import {
 import {AddIcon, ArrowDownIcon, ArrowUpIcon, ChevronDownIcon, DeleteIcon, EditIcon,} from "@chakra-ui/icons";
 import {Transaction, TransactionsTableProps,} from "../../../common/Types";
 import TransactionDeleteAlert from "./TransactionDeleteAlert";
+import {TransactionEditModal} from "./TransactionEditModal";
+import {TransactionNewModal} from "./TransactionNewModal";
 
-export default function TransactionsTable(transaction: TransactionsTableProps) {
+export default function TransactionsTable(prop: TransactionsTableProps) {
   const [modalStatus, setModalStatus] = useState(false);
   const [newModalStatus, setNewModalStatus] = useState(false);
   const [alertStatus, setAlertStatus] = useState(false);
-  const [editingAccount, setEditingAccount] = useState<Transaction | null>();
-  const [deletingAccount, setDeletingAccount] = useState<Transaction | null>();
-  const [selectedSorting, setSelectedSorting] = useState("newest");
-  const [selectedType, setSelectedType] = useState("all");
+  const [editingTransaction, setEditingTransaction] =
+    useState<Transaction | null>();
+  const [deletingTransaction, setDeletingTransaction] =
+    useState<Transaction | null>();
 
   function openDeleteAlert(transaction: Transaction) {
-    setDeletingAccount(transaction);
+    setDeletingTransaction(transaction);
     setAlertStatus(true);
   }
 
   function closeDeleteAlert() {
-    setDeletingAccount(null);
+    setDeletingTransaction(null);
     setAlertStatus(false);
   }
 
   function openEditAccountModal(transaction: Transaction) {
-    setEditingAccount(transaction);
+    setEditingTransaction(transaction);
     setModalStatus(true);
   }
 
   function handleCloseModal() {
-    setEditingAccount(null);
+    setEditingTransaction(null);
     setModalStatus(false);
   }
 
@@ -60,6 +62,16 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
     setNewModalStatus(false);
   }
 
+  // prop.data.map((x) => console.log(
+  //     new Date(x.date).toLocaleDateString("en-US", {
+  //       month: "2-digit" as "numeric" | "2-digit",
+  //       day: "2-digit" as "numeric" | "2-digit",
+  //       year: "2-digit",
+  //       // hour: "2-digit",
+  //       // minute: "2-digit",
+  //     })
+  // ));
+
   return (
     <Box
       borderWidth="1px"
@@ -69,7 +81,7 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
       p="4"
       boxShadow="lg"
       width="100%"
-      maxWidth="1500px"
+      // maxWidth="1200px"
       margin="0 auto"
     >
       <Flex justify="space-between" align="center" mb="4">
@@ -77,10 +89,7 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
           Transactions Table
         </Heading>
         <Flex align="center">
-          <Menu
-            closeOnSelect={false}
-            onClose={() => transaction.setReloading(true)}
-          >
+          <Menu closeOnSelect={false} onClose={() => prop.setReloading(true)}>
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
@@ -91,10 +100,8 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
             </MenuButton>
             <MenuList minWidth="240px">
               <MenuOptionGroup
-                value={transaction.sort}
-                onChange={(value) =>
-                  transaction.setSortMethod(value.toString())
-                }
+                value={prop.sort}
+                onChange={(value) => prop.setSortMethod(value.toString())}
                 title="Order"
                 type="radio"
               >
@@ -109,8 +116,8 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
               </MenuOptionGroup>
               <MenuDivider />
               <MenuOptionGroup
-                value={transaction.type}
-                onChange={(value) => transaction.setType(value.toString())}
+                value={prop.type}
+                onChange={(value) => prop.setType(value.toString())}
                 title="Type"
                 type="radio"
               >
@@ -133,9 +140,10 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
         <Table>
           <Thead>
             <Tr>
-              <Th >Type</Th>
-              <Th>Counter Party</Th>
+              <Th>Type</Th>
+              <Th>Name</Th>
               <Th>Category</Th>
+              <Th>Account</Th>
               <Th>Amount</Th>
               <Th>Date</Th>
               {/*<Th>Description</Th>*/}
@@ -143,40 +151,37 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
             </Tr>
           </Thead>
           <Tbody>
-            {transaction.data && transaction.data.length > 0 ? (
-              transaction.data.map((transaction: Transaction) => (
+            {prop.data && prop.data.length > 0 ? (
+              prop.data.map((transaction: Transaction) => (
                 <Tr key={transaction.id}>
                   <Td>{transaction.type}</Td>
                   <Td>{transaction.counter_party}</Td>
                   <Td>{transaction.category}</Td>
-                  <Td className={transaction.type === "Expense" ? "expense" : "income"}>
+                  <Td>
+                    {prop.accounts.data
+                      .find((account) => account.id === transaction.account)
+                      ?.name.toString()}
+                  </Td>
+                  <Td
+                    className={
+                      transaction.type === "Expense" ? "expense" : "income"
+                    }
+                  >
                     {transaction.type === "Expense" ? (
-                        <ArrowDownIcon color="red.500" mr={1}/>
+                      <ArrowDownIcon color="red.500" mr={1} />
                     ) : (
-                        <ArrowUpIcon color="green.500" mr={1}/>
+                      <ArrowUpIcon color="green.500" mr={1} />
                     )}
                     {"$" + transaction.amount.toLocaleString()}
                   </Td>
                   <Td>
                     {new Date(transaction.date).toLocaleDateString("en-US", {
-                      month: "2-digit",
-                      day: "2-digit",
+                      month: "2-digit" as "numeric" | "2-digit",
+                      day: "2-digit" as "numeric" | "2-digit",
                       year: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      timeZone: "UTC",
                     })}
                   </Td>
-                  {/*<Td width="10%">*/}
-                  {/*    <Tooltip*/}
-                  {/*        label={transaction.description}*/}
-                  {/*        bg="white"*/}
-                  {/*        color="black"*/}
-                  {/*    >*/}
-                  {/*        <Text maxW="200px" isTruncated _hover={{bg: "white"}}>*/}
-                  {/*            {transaction.description}*/}
-                  {/*        </Text>*/}
-                  {/*    </Tooltip>*/}
-                  {/*</Td>*/}
                   <Td>
                     <IconButton
                       aria-label="Edit"
@@ -208,34 +213,39 @@ export default function TransactionsTable(transaction: TransactionsTableProps) {
           </Tbody>
         </Table>
       </Box>
-      {/*{editingAccount && (*/}
-      {/*  <AccountEditModal*/}
-      {/*    isOpen={modalStatus}*/}
-      {/*    onClose={() => {*/}
-      {/*      handleCloseModal();*/}
-      {/*    }}*/}
-      {/*    accountData={editingAccount}*/}
-      {/*    setReloading={accounts.setReloading}*/}
-      {/*  />*/}
-      {/*)}*/}
-      {deletingAccount && (
+      {editingTransaction && (
+        <TransactionEditModal
+          isOpen={modalStatus}
+          onClose={() => {
+            handleCloseModal();
+          }}
+          transaction={editingTransaction}
+          setReloading={prop.setReloading}
+          accounts={prop.accounts}
+          incomeCategories={prop.incomeCategories}
+          expenseCategories={prop.expenseCategories}
+        />
+      )}
+      {deletingTransaction && (
         <Center>
           <TransactionDeleteAlert
             isOpen={alertStatus}
             onClose={() => {
               closeDeleteAlert();
             }}
-            transaction={deletingAccount}
-            setReloading={transaction.setReloading}
+            transaction={deletingTransaction}
+            setReloading={prop.setReloading}
           />
         </Center>
       )}
-      {/*)}*/}
-      {/*<AccountNewModal*/}
-      {/*  isOpen={newModalStatus}*/}
-      {/*  onClose={closeNewAccountModal}*/}
-      {/*  setReloading={accounts.setReloading}*/}
-      {/*/>*/}
+      <TransactionNewModal
+        isOpen={newModalStatus}
+        onClose={closeNewAccountModal}
+        setReloading={prop.setReloading}
+        accounts={prop.accounts}
+        incomeCategories={prop.incomeCategories}
+        expenseCategories={prop.expenseCategories}
+      />
     </Box>
   );
 }

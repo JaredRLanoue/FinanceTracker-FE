@@ -4,7 +4,7 @@ import {ExpenseCategoriesProp} from "../../../common/Types";
 import {WarningTwoIcon} from "@chakra-ui/icons";
 
 // add all category totals together, and all monthly budgets. then make a Overall Budget bar at the bottom
-
+// TODO: fix if 0.0, make a common toPrice function that returns $0.00 with 2 decimal places since its used alot?
 export const BudgetProgressBars: React.FC<ExpenseCategoriesProp> = ({
   categories,
 }) => {
@@ -34,7 +34,8 @@ export const BudgetProgressBars: React.FC<ExpenseCategoriesProp> = ({
                 {category}
               </Text>
               <Text>
-                {"$" + total.toLocaleString()} / {"$" + budget.toLocaleString()} {total > budget && <WarningTwoIcon color={"red"} mb={1}/>}
+                {"$" + total.toLocaleString()} / {"$" + budget.toLocaleString()}{" "}
+                {total > budget && <WarningTwoIcon color={"red"} mb={1} />}
               </Text>
             </Box>
             <Box flex="1" position="relative">

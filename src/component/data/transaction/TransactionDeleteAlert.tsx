@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import axios, {AxiosRequestConfig} from "axios";
-import {DeleteTransactionAlertProp, Transaction,} from "../../../common/Types";
+import {DeleteTransactionAlertProp, Transaction} from "../../../common/Types";
 
 const TransactionDeleteAlert: React.FC<DeleteTransactionAlertProp> = ({
   isOpen,

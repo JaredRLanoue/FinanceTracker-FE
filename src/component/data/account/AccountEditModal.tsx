@@ -1,20 +1,20 @@
 import {
-    Button,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    InputLeftAddon,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    Select,
-    useToast,
-    VStack,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  useToast,
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import axios, {AxiosRequestConfig} from "axios";
@@ -50,6 +50,13 @@ export const AccountEditModal: React.FC<EditAccountModalProps> = ({
       if (response.status === 200) {
         setReloading(true);
         onClose();
+        toast({
+          title: "Account successfully updated!",
+          status: "success",
+          isClosable: true,
+          position: "bottom",
+          variant: "subtle",
+        });
       } else {
         toast({
           title:
@@ -88,7 +95,7 @@ export const AccountEditModal: React.FC<EditAccountModalProps> = ({
         }}
       />
       <ModalContent>
-        <ModalHeader>Edit {accountData.name} Account</ModalHeader>
+        <ModalHeader>Edit Account</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form id="edit-form" onSubmit={(event) => handleSubmit(event)}>

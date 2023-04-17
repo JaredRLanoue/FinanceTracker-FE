@@ -73,7 +73,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
       p="4"
       boxShadow="lg"
       width="100%"
-      maxWidth="1200px"
+      maxWidth="100%"
       margin="0 auto"
     >
       {/*<Flex justify="space-between" align="center" mb="4">*/}
@@ -139,7 +139,7 @@ export default function AccountsTable(accounts: AccountsTableProps) {
               <Th>Type</Th>
               <Th>Balance</Th>
               {/*<Th>Starting Balance</Th>*/}
-              <Th>Created On</Th>
+              {/*<Th>Created On</Th>*/}
               <Th>Last Updated</Th>
               <Th>Actions</Th>
             </Tr>
@@ -152,15 +152,15 @@ export default function AccountsTable(accounts: AccountsTableProps) {
                   <Td>{account.type}</Td>
                   <Td>${account.balance.toLocaleString()}</Td>
                   {/*<Td>${account.starting_balance.toLocaleString()}</Td>*/}
-                  <Td>
-                    {new Date(account.created_at).toLocaleDateString("en-US", {
-                      month: "2-digit",
-                      day: "2-digit",
-                      year: "2-digit",
-                      // hour: "2-digit",
-                      // minute: "2-digit",
-                    })}
-                  </Td>
+                  {/*<Td>*/}
+                  {/*  {new Date(account.created_at).toLocaleDateString("en-US", {*/}
+                  {/*    month: "2-digit",*/}
+                  {/*    day: "2-digit",*/}
+                  {/*    year: "2-digit",*/}
+                  {/*    // hour: "2-digit",*/}
+                  {/*    // minute: "2-digit",*/}
+                  {/*  })}*/}
+                  {/*</Td>*/}
                   <Td>
                     {new Date(account.updated_at).toLocaleDateString("en-US", {
                       month: "2-digit",

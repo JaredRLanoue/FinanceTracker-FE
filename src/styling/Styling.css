@@ -35,3 +35,16 @@
 .income {
   color: green;
 }
+
+.chart-animation {
+  animation: chart-fade-in 0.5s ease-out;
+}
+
+@keyframes chart-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

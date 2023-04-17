@@ -1,5 +1,5 @@
 import React from "react";
-import {ExpenseCategoriesProp, ExpenseCategory,} from "../../../common/Types";
+import {ExpenseCategoriesProp, ExpenseCategory} from "../../../common/Types";
 import Chart from "react-apexcharts";
 import {
   Box,
@@ -66,7 +66,7 @@ const CategoryExpensePieChart = ({
     >
       <Flex justify="space-between" align="center" mb="4">
         <Heading as="h2" size="md">
-          Expense Breakdown
+          Expense Category Breakdown
         </Heading>
         <Box>
           <Menu closeOnSelect={true} onClose={() => setReloading(true)}>

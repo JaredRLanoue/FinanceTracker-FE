@@ -160,6 +160,9 @@ export interface TransactionsTableProps {
   setType: (type: string) => void;
   type: string;
   sort: string;
+  accounts: AccountList;
+  expenseCategories: CategoryList | null;
+  incomeCategories: CategoryList | null;
 }
 
 export interface TransactionList {
@@ -175,10 +178,10 @@ export interface TransactionMeta {
 
 export interface Transaction {
   id: string;
+  account: string;
   type: string;
   category: string;
   amount: number;
-  description: number;
   counter_party: string;
   date: string;
 }
@@ -188,4 +191,47 @@ export interface DeleteTransactionAlertProp {
   onClose: () => void;
   transaction: Transaction;
   setReloading: (reloading: boolean) => void;
+}
+
+export interface EditTransactionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  transaction: Transaction;
+  setReloading: (reloading: boolean) => void;
+  accounts: AccountList;
+  incomeCategories: CategoryList | null;
+  expenseCategories: CategoryList | null;
+}
+
+export interface NewTransactionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  setReloading: (reloading: boolean) => void;
+  accounts: AccountList;
+  incomeCategories: CategoryList | null;
+  expenseCategories: CategoryList | null;
+}
+
+export interface TransactionChartProp {
+  chart: TransactionChartView;
+}
+
+export interface TransactionChart {
+  date: string;
+  value: number;
+}
+
+export interface TransactionChartList {
+  expenses: TransactionChart[];
+  incomes: TransactionChart[];
+}
+
+export interface TransactionChartView {
+  charts: TransactionChartList;
+}
+
+export interface UpdateUserPayload {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
 }
