@@ -5,6 +5,7 @@ import {
     FormControl,
     FormLabel,
     Heading,
+    Image,
     Input,
     Link,
     Stack,
@@ -73,7 +74,8 @@ export default function Login() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+          <Image src={"logo.svg"} />
+          <Heading fontSize={"4xl"} paddingTop={"25%"}>Sign in to your account</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
             to enjoy all of our cool features 💰️
           </Text>
@@ -112,7 +114,7 @@ export default function Login() {
                 {/*<Checkbox>Remember me</Checkbox>*/}
                 <Text align={"center"}>
                   Don't have an account?{" "}
-                  <Link onClick={handleRegisterClick} color={"blue.400"}>
+                  <Link onClick={handleRegisterClick} color={"brand.200"}>
                     Sign Up
                   </Link>
                 </Text>

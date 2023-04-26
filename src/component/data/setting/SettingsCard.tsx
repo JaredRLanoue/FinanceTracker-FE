@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig} from "axios";
-import {Button, useToast,} from "@chakra-ui/react";
+import {Button, useToast} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
 
 export const SettingsCard = () => {
@@ -73,7 +73,14 @@ export const SettingsCard = () => {
       <Button colorScheme="red" onClick={handleDelete}>
         Delete Account
       </Button>
-      <Button colorScheme="green" onClick={handleLoadExampleData}>
+      <Button
+        bg={"brand.100"}
+        color={"white"}
+        _hover={{
+          bg: "brand.200",
+        }}
+        onClick={handleLoadExampleData}
+      >
         Load Example Data
       </Button>
     </>

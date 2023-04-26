@@ -6,6 +6,7 @@ import {
   FormLabel,
   Heading,
   HStack,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -102,7 +103,8 @@ export default function Register() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
+          <Image src={"logo.svg"} />
+          <Heading fontSize={"4xl"} textAlign={"center"} paddingTop={"5%"}>
             Sign up
           </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
@@ -183,8 +185,8 @@ export default function Register() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user?{" "}
-                <Link onClick={handleLoginClick} color={"blue.400"}>
+                Already have an account?{" "}
+                <Link onClick={handleLoginClick} color={"brand.200"}>
                   Login
                 </Link>
               </Text>

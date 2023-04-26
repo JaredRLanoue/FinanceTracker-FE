@@ -1,26 +1,26 @@
 import React, {useState} from "react";
 import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItemOption,
-  MenuList,
-  MenuOptionGroup,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
+    Box,
+    Button,
+    Center,
+    Flex,
+    Heading,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItemOption,
+    MenuList,
+    MenuOptionGroup,
+    Table,
+    Tbody,
+    Td,
+    Th,
+    Thead,
+    Tr,
 } from "@chakra-ui/react";
 import {AddIcon, ArrowDownIcon, ArrowUpIcon, ChevronDownIcon, DeleteIcon, EditIcon,} from "@chakra-ui/icons";
-import {Transaction, TransactionsTableProps,} from "../../../common/Types";
+import {Transaction, TransactionsTableProps} from "../../../common/Types";
 import TransactionDeleteAlert from "./TransactionDeleteAlert";
 import {TransactionEditModal} from "./TransactionEditModal";
 import {TransactionNewModal} from "./TransactionNewModal";

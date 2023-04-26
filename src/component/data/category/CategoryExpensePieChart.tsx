@@ -2,15 +2,15 @@ import React from "react";
 import {ExpenseCategoriesProp, ExpenseCategory} from "../../../common/Types";
 import Chart from "react-apexcharts";
 import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Menu,
-  MenuButton,
-  MenuItemOption,
-  MenuList,
-  MenuOptionGroup,
+    Box,
+    Button,
+    Flex,
+    Heading,
+    Menu,
+    MenuButton,
+    MenuItemOption,
+    MenuList,
+    MenuOptionGroup,
 } from "@chakra-ui/react";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 

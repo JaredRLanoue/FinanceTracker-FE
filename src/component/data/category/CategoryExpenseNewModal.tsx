@@ -1,19 +1,19 @@
 import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useToast,
-  VStack,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputLeftAddon,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    useToast,
+    VStack,
 } from "@chakra-ui/react";
 import axios, {AxiosRequestConfig} from "axios";
 import React from "react";
@@ -48,7 +48,7 @@ export const CategoryExpenseNewModal: React.FC<NewEntityModalProps> = ({
         setReloading(true);
         onClose();
         toast({
-          title: "Expense category successfully updated!",
+          title: "Expense category successfully created!",
           status: "success",
           isClosable: true,
           position: "bottom",

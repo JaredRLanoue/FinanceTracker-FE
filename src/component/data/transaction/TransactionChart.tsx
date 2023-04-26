@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Flex, Heading,} from "@chakra-ui/react";
+import {Box, Flex, Heading} from "@chakra-ui/react";
 import Chart from "react-apexcharts";
 import {ApexOptions} from "apexcharts";
 import {TransactionChartProp} from "../../../common/Types";
@@ -46,7 +46,7 @@ const TransactionChart = ({ chart }: TransactionChartProp) => {
       gradient: {
         inverseColors: false,
         opacityFrom: 0.75,
-        opacityTo: 0,
+        opacityTo: 0.25,
       },
     },
     stroke: {
@@ -101,11 +101,12 @@ const TransactionChart = ({ chart }: TransactionChartProp) => {
     },
     grid: {
       padding: {
-        left: -5,
+        left: 5,
         right: 5,
       },
     },
     tooltip: {
+      shared: true,
       x: {
         format: "MMM yyyy",
       },

@@ -1,24 +1,24 @@
 import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  useToast,
-  VStack,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputLeftAddon,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Select,
+    useToast,
+    VStack,
 } from "@chakra-ui/react";
 import React, {useState} from "react";
 import axios, {AxiosRequestConfig} from "axios";
-import {Account, NewTransactionModalProps,} from "../../../common/Types";
+import {Account, NewTransactionModalProps} from "../../../common/Types";
 import {DateTimeFormatter, Instant, ZoneId} from "js-joda";
 
 export const TransactionNewModal: React.FC<NewTransactionModalProps> = ({

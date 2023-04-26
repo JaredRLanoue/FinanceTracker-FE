@@ -14,9 +14,9 @@
 //     }
 // }
 
-import {Box, Center, Divider, Heading, VStack,} from "@chakra-ui/react";
+import {Box, Center, Divider, Heading, VStack} from "@chakra-ui/react";
 import React from "react";
-import {SettingsCard} from "../setting/SettingsCard";
+import {SettingsCard} from "../data/setting/SettingsCard";
 
 function Settings() {
   return (
